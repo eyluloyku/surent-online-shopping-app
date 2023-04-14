@@ -50,6 +50,10 @@ const productSchema = new mongoose.Schema({
       max: 5,
       default: 0,
       required: false  
+    },
+    images: {
+        type: Array,
+        default: []
     }
 },{timestamps:true})
 
