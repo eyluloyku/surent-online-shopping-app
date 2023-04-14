@@ -1,6 +1,6 @@
 /*the product model*/
 
-const mongoose = require('mongoose');
+import mongoose from "mongoose"
 const schema = mongoose.Schema;
 
 //pass object as argument, this is our schema.
@@ -53,4 +53,8 @@ const productSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-module.exports = mongoose.model('Product',productSchema);
+
+const Product = mongoose.model("Product", productSchema);
+
+export default Product;
+//module.exports = mongoose.model('Product',productSchema);

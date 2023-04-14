@@ -1,19 +1,31 @@
-const express = require('express');
-const productController = require("../controllers/productController")
-const router = express.Router() // we will get app via this.
+import Router from "express";
+//import productController from "../controllers/productController.js";
 
-router.get('/getAll',productController.getAllProds)
 
-router.get('/prodID/:id',productController.getProductById)
+import {
+    createProd,
+    getAllProds,
+    getProductById,
+    getProductByName,
+    getProductByCategory,
+    deleteProduct,
+    updateProduct
+} from "../controllers/productController.js"
 
-router.get('/prodName/:name',productController.getProductByName)
+const router = Router();
 
-router.get('/prodCategory/:category',productController.getProductByCategory)
+router.get('/getAll', getAllProds)
 
-router.post('/add',productController.createProd);
+router.get('/prodID/:id',getProductById)
 
-router.delete('/rem/:id',productController.deleteProduct)
+router.get('/prodName/:name',getProductByName)
 
-router.patch('/update/:id',productController.updateProduct)
+router.get('/prodCategory/:category',getProductByCategory)
 
-module.exports = router;
+router.post('/add',createProd);
+
+router.delete('/rem/:id',deleteProduct)
+
+router.patch('/update/:id',updateProduct)
+
+export {router};
