@@ -1,5 +1,6 @@
 import Router from "express";
 //import productController from "../controllers/productController.js";
+import cors from 'cors';
 
 
 import {
@@ -13,6 +14,7 @@ import {
 } from "../controllers/productController.js"
 
 const router = Router();
+router.use(cors());
 
 router.get('/getAll', getAllProds)
 
