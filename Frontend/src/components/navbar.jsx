@@ -16,6 +16,12 @@ function Navbar() {
     setClick(false);
   };
 
+  const toggleProducts = () => {
+    let subMenu = document.getElementById("subMenu");
+    subMenu.classList.toggle("open-products");
+    setClick(false);
+  };
+
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -51,6 +57,7 @@ function Navbar() {
                 Home
               </Link>
             </li>
+
             <li className="nav-item">
               <Link
                 to="/Login-page"
@@ -60,15 +67,53 @@ function Navbar() {
                 Login Page
               </Link>
             </li>
+
             <li className="nav-item">
               <Link
-                to="/products"
+                to=""
                 className="nav-links"
-                onClick={closeMobileMenu}
+                onClick={toggleProducts}
               >
                 Products
               </Link>
+
+              <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                  <a class="sub-products-link" href="/shirts">
+                    <img src="icons/shirts.png" class="product-icon" alt="shirts"></img>
+                    <h3>Shirts</h3>
+                  </a>
+                  <hr></hr>
+
+                  <a class="sub-products-link" href="/pants">
+                    <img src="icons/pants.png" class="product-icon" alt="pants"></img>
+                    <h3>Pants</h3>
+                  </a>
+                  <hr></hr>
+
+                  <a class="sub-products-link" href="/coats">
+                    <img src="icons/coats.png" class="product-icon" alt="coats"></img>
+                    <h3>Coats</h3>
+                  </a>
+                  <hr></hr>
+
+                  <a class="sub-products-link" href="/hats">
+                    <img src="icons/hats.png" class="product-icon" alt="hats"></img>
+                    <h3>Hats</h3>
+                  </a>
+                  <hr></hr>
+
+                  <a class="sub-products-link" href="/shoes">
+                    <img src="icons/shoes.png" class="product-icon" alt="shoes"></img>
+                    <h3>Shoes</h3>
+                  </a>
+                  <hr></hr>
+
+                </div>
+              </div>
             </li>
+
+
             <li className="nav-item">
               <Link
                 to="/Register"
@@ -83,6 +128,7 @@ function Navbar() {
         </div>
       </nav>
     </>
+
   );
 }
 
