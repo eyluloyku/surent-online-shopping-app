@@ -5,10 +5,16 @@ import authRoutes from "./routes/auth.js";
 import refreshTokenRoutes from "./routes/refreshToken.js";
 import userRoutes from "./routes/users.js";
 import {router} from "./routes/productsRoutes.js";
+import cors from 'cors';
 const app = express();
 
+var corsOption = {
+    origin : "http://localhost:3000",
+    optionSuccessStatus: 200
+}
 config();
 dbConnect();
+app.use(cors(corsOption));
 
 app.use(express.json());
 
