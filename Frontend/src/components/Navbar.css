@@ -76,54 +76,6 @@
   display: none;
 }
 
-
-
-.sub-menu-wrap{
-  position: absolute;
-  top: 92%;
-  right: 18.3%;
-  width: 160px;
-  max-height: 0px;
-  overflow: hidden;
-  transition: max-height 0.5s;
-}
-
-.sub-menu-wrap.open-products{
-  max-height: 400px;
-}
-
-.sub-menu{
-  background: #fff;
-  padding: 10px;
-  margin: 10px;
-}
-
-.sub-menu hr {
-  border: 0;
-  height: 1px;
-  width: 100%;
-  background: #ccc;
-  margin: 15px 0 10px;
-}
-
-.sub-products-link{
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #525252;
-  margin: 12px 0;
-}
-
-.sub-products-link h3{
-  width: 100%;
-}
-
-.product-icon{
-  width: 25px;
-  height: 25px;
-}
-
-
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;

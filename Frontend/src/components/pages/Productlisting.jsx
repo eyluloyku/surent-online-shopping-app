@@ -1,30 +1,15 @@
-import React, {useState,useEffect} from 'react'
-import axios from "axios";
+import React from 'react'
+import Footer from '../Footer'
+import ListProds from '../listProds'
+import "./Productlisting.css";
 
-function Productlisting() {
-
-    //data is initially an empty list
-    const [data,setData] = useState([]); 
-
-    useEffect(()=>{
-      axios.get('http://localhost:8080/api/products/getAll').then(response=>{
-        setData(response.data);
-      }).catch(error=>{
-        console.log(error,);
-      });
-    },[]);
-
+export default function Productlisting() {
   return (
-    <div>
-        <div className="container">
-            <ul>
-              {data.map(item=>(
-                <li key={item._id}>{item.Pname}</li>
-              ))}
-            </ul>
+    <div className='listed-prods'>
+        <ListProds></ListProds>
+        <div className='footer'>
+          <Footer></Footer>
         </div>
     </div>
   )
 }
-
-export default Productlisting
