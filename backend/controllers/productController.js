@@ -137,5 +137,5 @@ export {
     getProductByName,
     getProductByCategory,
     deleteProduct,
-    updateProduct
+    updateProduct,
 };

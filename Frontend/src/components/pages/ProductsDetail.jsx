@@ -2,11 +2,12 @@ import * as React from 'react';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
-import { Box, Grid, Typography, Button } from "@mui/material";
+import { Box, Grid, Typography, Button, Rating} from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Carousel from 'react-material-ui-carousel';
 import Item from '../Items';
 import Footer from '../Footer'
+
 
 //sx={{ display: { xl: 'none', xs: 'block' } }}
 
@@ -57,13 +58,39 @@ export default function ProductsDetail() {
                     </Box>
                 </Grid>
                 <Grid item xs={6}> 
+                    <Box p={2} height={"15px"}> 
+                        <Grid container>
+                            <Grid>
+                                <Rating
+                                name='custom-no-value'
+                                value= {product.rating}
+                                precision={0.5}
+                                sx={{
+                                fontSize: '2rem',
+                                }}
+                                readOnly
+                            />
+                        </Grid>
+                        <Grid>
+                            <Typography variant="h6" color={'grey'}>  ({product.numReviews} ratings)</Typography>
+                        </Grid>
+                        </Grid>
+
+                    </Box>
                     <Box p={2}> 
                         <Typography variant="h2" color={'#242424'}>{product.Pname}</Typography>
                     </Box>
                     <Box p={2}> 
                         <Typography variant="h6" color={'#242424'}>{product.description}</Typography>
                     </Box>
-                    <Box p={2}> 
+                    <Box p={2} height={"5px"}> 
+                        <Typography variant="h7" color={'#242424'}>Distributor: {product.Distribution_inf}</Typography>
+                    </Box>
+                    <Box p={2} height={"5px"}> 
+                        <Typography variant="h7" color={'#242424'}>Warranty: {product.warranty} days</Typography>
+                    </Box>
+
+                    <Box p={2} height={"75px"}> 
                         <Grid container>
                             <Grid item p={1}>
                                 <Typography variant="h4" color={'#242424'}>${product.price}</Typography>
@@ -75,7 +102,12 @@ export default function ProductsDetail() {
                         
                     </Box>
                     <Box p={2}>
-                        <Button variant="contained" startIcon={<AddShoppingCartIcon />}>Add to Cart</Button>
+                        {product.stock > 0 ? (
+                        <Button variant="contained" startIcon={<AddShoppingCartIcon />}>Add to Cart</Button>  
+                        ): (
+                        <Button variant="contained" color="error" startIcon={<AddShoppingCartIcon />} disabled>Out of Stock</Button>  
+                        )
+                        }
                     </Box>
                     
                 </Grid>

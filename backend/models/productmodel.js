@@ -3,6 +3,7 @@
 import mongoose from "mongoose"
 const schema = mongoose.Schema;
 
+
 //pass object as argument, this is our schema.
 const productSchema = new mongoose.Schema({
     Pname: {
@@ -44,6 +45,7 @@ const productSchema = new mongoose.Schema({
         type:String,
         required:false
     },
+
     rating:{
       type:Number,
       min: 0,
@@ -51,6 +53,7 @@ const productSchema = new mongoose.Schema({
       default: 0,
       required: false  
     }
+    
 },{timestamps:true})
 
 
