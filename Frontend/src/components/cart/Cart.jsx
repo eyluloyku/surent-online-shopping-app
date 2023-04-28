@@ -50,7 +50,7 @@ const Cart = () => {
 
     return (
         <>
-            <button className="btn btn-primary btn-cart" onClick={handleShow}>
+            <button className="btn--outline" onClick={handleShow}>
                 Cart
             </button>
             <Modal show={show} onHide={handleClose}>

@@ -18,6 +18,8 @@ function App() {
           <Route path="/Products" exact Component={Productlisting}></Route>
           <Route path ="/Register" exact Component={LoginRegister}></Route>
           <Route path="/products/:id" element={<ProductsDetail/>} />
+          <Route path="/register" exact Component={LoginRegister}></Route>
+          <Route path="/login" exact Component={LoginRegister}></Route>
         </Routes>
       </Router>
     </div>

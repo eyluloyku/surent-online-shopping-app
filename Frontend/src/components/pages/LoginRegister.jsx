@@ -13,6 +13,9 @@ function LoginRegister(props) {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerAddress, setRegisterAddress] = useState("");
     const [registerPhone, setRegisterPhone] = useState("");
+    const [error, setError] = useState("");
+    const [registerError, setRegisterError] = useState("");
+
 
     const navigate = useNavigate();
 
@@ -49,6 +52,7 @@ function LoginRegister(props) {
     };
 
     const handleLoginSubmit = async (event) => {
+        setError("")
         event.preventDefault();
         try {
             const response = await axios.post("http://localhost:8080/api/logIn", {
@@ -60,7 +64,7 @@ function LoginRegister(props) {
             navigate('/');
             window.location.reload()
         } catch (error) {
-            console.log(error)
+            await setError(error.response.data.message)
         }
     };
 
@@ -78,10 +82,12 @@ function LoginRegister(props) {
             });
             console.log(response)
             navigate('/login');
+            window.location.reload()
         } catch (error) {
-            console.log(error)
+            await setRegisterError(error.response.data.message)
         }
     }
+
     return (
         <>
             <div className="section">
@@ -91,7 +97,9 @@ function LoginRegister(props) {
                             <div className="section pb-5 pt-5 pt-sm-2 text-center">
                                 <h6 className="mb-0 pb-3">
                                     <span>Log In </span><span>Sign Up</span>
+
                                 </h6>
+
                                 <input
                                     className="checkbox"
                                     type="checkbox"
@@ -105,6 +113,7 @@ function LoginRegister(props) {
                                             <div className="center-wrap">
                                                 <div className="section text-center">
                                                     <h4 className="mb-4 pb-3">Log In</h4>
+                                                    {error ? <div className="alert alert-danger">{error} </div> : ""}
                                                     <div className="form-group">
                                                         <input
                                                             type="email"
@@ -126,8 +135,7 @@ function LoginRegister(props) {
                                                     <button
                                                         onClick={handleLoginSubmit} className="btN mt-4"
                                                     >Login
-                                                    </button
-                                                    >
+                                                    </button>
                                                     <p className="mb-0 mt-4 text-center">
                                                         <a href="https://www.google.com/" className="link"
                                                         >Forgot your password?</a
@@ -140,6 +148,8 @@ function LoginRegister(props) {
                                             <div className="center-wrap">
                                                 <div className="section text-center">
                                                     <h4 className="mb-3 pb-3" id="js--signuptext">Sign Up</h4>
+                                                    {registerError ?
+                                                        <div className="alert alert-danger">{registerError} </div> : ""}
                                                     <div className="form-group">
                                                         <input
                                                             type="text"
@@ -215,8 +225,7 @@ function LoginRegister(props) {
                                                         href="https://www.google.com/"
                                                         className="btN mt-4"
                                                         id="js--registerbutton"
-                                                        onClick={handleRegisterSubmit}
-                                                    >Register
+                                                        onClick={handleRegisterSubmit}>Register
                                                     </button>
                                                 </div>
                                             </div>
@@ -228,8 +237,7 @@ function LoginRegister(props) {
                     </div>
                 </div>
             </div>
-        </>
-    )
+        </>)
 }
 
 export default LoginRegister;

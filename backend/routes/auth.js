@@ -1,57 +1,55 @@
-import { Router } from "express";
+import {Router} from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import generateTokens from "../utils/generateTokens.js";
-import {
-	signUpBodyValidation,
-	logInBodyValidation,
-} from "../utils/validationSchema.js";
+import {logInBodyValidation, signUpBodyValidation,} from "../utils/validationSchema.js";
+import cors from "cors";
 
 const router = Router();
 
 // signup
-router.post("/signUp", async (req, res) => {
+router.post("/signUp", cors(), async (req, res) => {
 	try {
-		const { error } = signUpBodyValidation(req.body);
+		const {error} = signUpBodyValidation(req.body);
 		if (error)
 			return res
 				.status(400)
-				.json({ error: true, message: error.details[0].message });
+				.json({error: true, message: error.details[0].message});
 
-		const user = await User.findOne({ email: req.body.email });
+		const user = await User.findOne({email: req.body.email});
 		if (user)
 			return res
 				.status(400)
-				.json({ error: true, message: "User with given email already exist" });
+				.json({error: true, message: "User with given email already exist"});
 
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-		await new User({ ...req.body, password: hashPassword }).save();
+		await new User({...req.body, password: hashPassword}).save();
 
 		res
 			.status(201)
-			.json({ error: false, message: "Account created sucessfully" });
+			.json({error: false, message: "Account created sucessfully"});
 	} catch (err) {
 		console.log(err);
-		res.status(500).json({ error: true, message: "Internal Server Error" });
+		res.status(500).json({error: true, message: "Internal Server Error"});
 	}
 });
 
 // login
-router.post("/logIn", async (req, res) => {
+router.post("/logIn", cors(), async (req, res) => {
 	try {
-		const { error } = logInBodyValidation(req.body);
+		const {error} = logInBodyValidation(req.body);
 		if (error)
 			return res
 				.status(400)
-				.json({ error: true, message: error.details[0].message });
+				.json({error: true, message: error.details[0].message});
 
-		const user = await User.findOne({ email: req.body.email });
+		const user = await User.findOne({email: req.body.email});
 		if (!user)
 			return res
 				.status(401)
-				.json({ error: true, message: "Invalid email or password" });
+				.json({error: true, message: "Invalid email or password"});
 
 		const verifiedPassword = await bcrypt.compare(
 			req.body.password,
@@ -60,9 +58,9 @@ router.post("/logIn", async (req, res) => {
 		if (!verifiedPassword)
 			return res
 				.status(401)
-				.json({ error: true, message: "Invalid email or password" });
+				.json({error: true, message: "Invalid email or password"});
 
-		const { accessToken, refreshToken } = await generateTokens(user);
+		const {accessToken, refreshToken} = await generateTokens(user);
 
 		res.status(200).json({
 			error: false,
@@ -72,7 +70,7 @@ router.post("/logIn", async (req, res) => {
 		});
 	} catch (err) {
 		console.log(err);
-		res.status(500).json({ error: true, message: "Internal Server Error" });
+		res.status(500).json({error: true, message: "Internal Server Error"});
 	}
 });
 
