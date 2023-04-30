@@ -7,7 +7,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Carousel from 'react-material-ui-carousel';
 import Item from '../Items';
 import Footer from '../Footer'
-
+import ListReviews from '../ListReviews'
 
 //sx={{ display: { xl: 'none', xs: 'block' } }}
 
@@ -72,7 +72,7 @@ export default function ProductsDetail() {
                             />
                         </Grid>
                         <Grid>
-                            <Typography variant="h6" color={'grey'}>  ({product.numReviews} ratings)</Typography>
+                            <Typography variant="h6" color={'grey'}>  ({product.numOfReviews} ratings)</Typography>
                         </Grid>
                         </Grid>
 
@@ -101,6 +101,9 @@ export default function ProductsDetail() {
                         </Grid>
                         
                     </Box>
+                    <Box p={2} height={"5px"}> 
+                        <Typography variant="h7" color={'#242424'}> {product.stock} stock left!</Typography>
+                    </Box>
                     <Box p={2}>
                         {product.stock > 0 ? (
                         <Button variant="contained" startIcon={<AddShoppingCartIcon />}>Add to Cart</Button>  
@@ -112,7 +115,24 @@ export default function ProductsDetail() {
                     
                 </Grid>
             </Grid>
+            <Grid container
+                p={8}
+                direction="row"
+                alignItems="left"
+                justifyContent="left">
+                <Grid>
+                    <Box p={2}> 
+                            <Typography variant="h4" color={'#242424'}>Reviews:</Typography>
+                    </Box>
+                    <Box>
+                        {product.reviews.length > 0 && (
+                                <ListReviews reviews={product.reviews} />
+                            )}
+                    </Box>
+                </Grid>
 
+                
+            </Grid>
             <div className='footer'>
                 <Footer></Footer>
             </div>

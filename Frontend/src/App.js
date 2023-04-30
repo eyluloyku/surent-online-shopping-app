@@ -6,6 +6,7 @@ import Home from "./components/pages/Home";
 import Productlisting from "./components/pages/Productlisting";
 import LoginRegister from "./components/pages/LoginRegister";
 import ProductsDetail from "./components/pages/ProductsDetail";
+import ReviewSubmit  from "./components/pages/ReviewSubmit";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/products/:id" element={<ProductsDetail/>} />
           <Route path="/register" exact Component={LoginRegister}></Route>
           <Route path="/login" exact Component={LoginRegister}></Route>
+          <Route path="/ReviewSubmit/:id" exact Component={ReviewSubmit}></Route>
         </Routes>
       </Router>
     </div>

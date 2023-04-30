@@ -45,15 +45,43 @@ const productSchema = new mongoose.Schema({
         type:String,
         required:false
     },
-
     rating:{
       type:Number,
       min: 0,
       max: 5,
       default: 0,
       required: false  
-    }
-    
+    },
+    numOfReviews: {
+        type: Number,
+        default: 0
+    },
+    reviews: 
+    [
+        {
+            approved: {
+                type: Boolean,
+                default: false
+            },
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User',
+                required: true
+            },
+            user_name: {
+                type: String,
+                required: true
+            },
+            rating: {
+                type: Number,
+                required: true
+            },
+            comment: {
+                type: String,
+                required: true
+            }
+        }
+    ],
 },{timestamps:true})
 
 

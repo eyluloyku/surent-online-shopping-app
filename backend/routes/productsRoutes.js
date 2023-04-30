@@ -1,4 +1,5 @@
 import Router from "express";
+import auth from "../middleware/auth.js";
 //import productController from "../controllers/productController.js";
 import cors from 'cors';
 import {
@@ -9,11 +10,14 @@ import {
     getProductByCategory,
     deleteProduct,
     updateProduct,
+    createProductReview,
+    getProductReviews
 } from "../controllers/productController.js"
 
 const router = Router();
 
 router.get('/getAll', getAllProds)
+router.post('/add',createProd);
 
 router.get('/prodID/:id',getProductById)
 
@@ -21,10 +25,14 @@ router.get('/prodName/:name',getProductByName)
 
 router.get('/prodCategory/:category',getProductByCategory)
 
-router.post('/add',createProd);
+
 
 router.delete('/rem/:id',deleteProduct)
 
 router.patch('/update/:id',updateProduct)
+
+router.post('/postReview/:id', auth, createProductReview);
+
+router.get('/getReview/:id', getProductReviews);
 
 export {router};

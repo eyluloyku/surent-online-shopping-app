@@ -1,4 +1,5 @@
 import Product from '../models/productmodel.js'
+import User from '../models/User.js'
 import mongoose from "mongoose"
 
 //get all products
@@ -78,7 +79,7 @@ const getProductByCategory = async (req, res) => {
 
 //create new product
 const createProd = async (req,res) =>{
-    const {Pname,price,stock,variants, description, warranty, Distribution_inf, Discount_rate, category, rating } = req.body;
+    const {Pname,price,stock,variants, description, warranty, Distribution_inf, Discount_rate, category, rating, numOfReviews,reviews } = req.body;
     //add prod document to db.
     try {
         const prod = await Product.create({
@@ -91,7 +92,9 @@ const createProd = async (req,res) =>{
             Distribution_inf,
             Discount_rate,
             category,
-            rating
+            rating,
+            numOfReviews,
+            reviews
         }); //this is async.
         res.status(200).json(prod);
     } catch (error) {
@@ -129,6 +132,58 @@ const deleteProduct = async(req,res) =>{
   res.status(200).json(product);
 }
 
+const createProductReview = async(req, res) =>{
+  const { rating, comment} = req.body;
+  const {id} = req.params;
+  const postedBy = await User.findById(req.user._id);
+    const review = {
+        user: req.user._id,
+        user_name: postedBy.name,
+        rating: Number(rating),
+        comment
+    }
+  
+    const product = await Product.findById(id);
+  
+    const isReviewed = product.reviews.find(
+        r => r.user.toString() === req.user._id.toString()
+    )
+
+    if (isReviewed) {
+      
+        product.reviews.forEach(review => {
+            if (review.user.toString() === req.user._id.toString()) {
+                product.rating = ((product.rating*product.reviews.length)-(review.rating)+Number(rating))/(product.reviews.length);
+                review.comment = comment;
+                review.rating = rating;
+                review.approved = false;
+                
+            }
+        })
+        
+
+    } else {
+        product.rating = ((product.rating*product.reviews.length)+review.rating)/(product.reviews.length+1)
+        product.reviews.push(review);
+        product.numOfReviews = product.reviews.length
+    }
+    
+    await product.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+        success: true
+    }) 
+}
+// Get Product Reviews   =>   /api/v1/reviews
+const getProductReviews = async (req, res) => {
+  const {id} = req.params;
+  const product = await Product.findById(id);
+
+  res.status(200).json({
+      success: true,
+      reviews: product.reviews
+  })
+}
 
 export {
     createProd,
@@ -138,4 +193,6 @@ export {
     getProductByCategory,
     deleteProduct,
     updateProduct,
+    createProductReview,
+    getProductReviews
 };
