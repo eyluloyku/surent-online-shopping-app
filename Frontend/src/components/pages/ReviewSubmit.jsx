@@ -34,12 +34,15 @@ function ReviewSubmit(props) {
     const handleChangeRating = (event) => {
         setRating(event.target.value)
     }
-    const handleChangeComment = (event) => {
-        setComment(event.target.value)
-    }
+
     if (!product) {
         return 'cannot fetch from database';
     }
+    
+    const handleChangeComment = (event) => {
+        setComment(event.target.value)
+    }
+
     const handleReviewSubmit = async (event) => {
         setError("")
         event.preventDefault();
@@ -93,12 +96,8 @@ function ReviewSubmit(props) {
                                                       
                                                     </div>
                                                     <div className="form-group mt-2">
-                                                        <input
-                                                            type="comment"
-                                                            className="form-style"
-                                                            placeholder="Comment"
-                                                            onChange={handleChangeComment}
-                                                        />
+
+                                                        <textarea type="comment" className="form-style" placeholder="Comment Here" rows="3" onChange={handleChangeComment}></textarea>
                                                         
                                                     </div>
                                                     <button

@@ -44,7 +44,7 @@ export default function ProductsDetail() {
     return(
         <div className="product-details">
             <Grid container 
-                p={10}
+                style={{ padding: "75px 150px" }} 
                 direction="row"
                 alignItems="center"
                 justifyContent="center">
@@ -116,15 +116,18 @@ export default function ProductsDetail() {
                 </Grid>
             </Grid>
             <Grid container
-                p={8}
+                style={{ padding: "0px 150px", marginTop: 15 }} 
                 direction="row"
                 alignItems="left"
                 justifyContent="left">
-                <Grid>
-                    <Box p={2}> 
-                            <Typography variant="h4" color={'#242424'}>Reviews:</Typography>
+                <Grid style={{ width: "100%" }}>
+                    <Box p={1}> 
+                            <Typography variant="h3" color={'#242424'}>Reviews</Typography>
                     </Box>
-                    <Box>
+                    <Box p={1}> 
+                            <Typography variant="h7" color={'#242424'}>{product.reviews.length} reviews</Typography>
+                    </Box>
+                    <Box p={1}>
                         {product.reviews.length > 0 && (
                                 <ListReviews reviews={product.reviews} />
                             )}
