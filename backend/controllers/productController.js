@@ -25,7 +25,8 @@ const getProductById = async (req,res)=>{
     }
 }
 
-const getProductByName = async ({ query: { name } }, res) => {
+const getProductByName = async (req, res) => {
+    var name = req.params.name;
     try {
         //well originally find was used but then found this method that was more efficient.
       const tprods = await Product.aggregate([

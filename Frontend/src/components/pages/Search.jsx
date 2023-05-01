@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Footer from '../Footer'
-import ListProds from '../listProds'
+import ListSearchProds from '../listSearchProducts'
 import "./Productlisting.css";
 
 
@@ -12,6 +12,7 @@ export default function Productlisting() {
     event.preventDefault();
     if (searchValue) {
       window.location.href = `/search/${searchValue}`;
+
     }
   };
 
@@ -34,12 +35,12 @@ export default function Productlisting() {
             </input>
             <button type='submit'><img src="/icons/search.png" alt="." /></button>
           </form>
-                      
+
         </div>
 
 
 
-        <ListProds></ListProds>
+        <ListSearchProds></ListSearchProds>
         <div className='footer'>
           <Footer></Footer>
         </div>
