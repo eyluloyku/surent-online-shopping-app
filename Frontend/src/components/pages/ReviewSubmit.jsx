@@ -70,22 +70,20 @@ function ReviewSubmit(props) {
             <div className="section">
                 <div className="container">
                     <div className="row full-height justify-content-center">
-                        <div className="col-12 text-center align-self-center py-5">
+                        <div className="col-12 text-center align-self-center">
                             <div className="section pb-5 pt-5 pt-sm-2 text-center">
-                                <h6 className="mb-0 pb-3">
-                                    <span>You can submit your review below </span>
-
-                                </h6>
+                                
                                 <label htmlFor="reg-log"></label>
                                 <div className="card-3d-wrap mx-auto">
                                     <div className="card-3d-wrapper">
                                         <div className="card-front">
                                             <div className="center-wrap">
                                                 <div className="section text-center">
-                                                    <h4 className="mb-4 pb-3">{product.Pname}</h4>
-                                                    <h4 className="mb-4 pb-3">Submit Review</h4>
+                                                    <h4 className="mb-4 pb-3">Review for {product.Pname}</h4>
+                                                    <img src={product.images[0]} class="img-thumbnail"></img>
                                                     {error ? <div className="alert alert-danger">{error} </div> : ""}
                                                     {message ? <div className="alert alert-danger">{message} </div> : ""}
+                                                    <hr/>
                                                     <div className="form-group">
                                                     <Rating
                                                         name="simple-controlled"
@@ -97,7 +95,7 @@ function ReviewSubmit(props) {
                                                     </div>
                                                     <div className="form-group mt-2">
 
-                                                        <textarea type="comment" className="form-style" placeholder="Comment Here" rows="3" onChange={handleChangeComment}></textarea>
+                                                        <textarea type="comment" className="form-style" placeholder="Your Review" rows="3" onChange={handleChangeComment}></textarea>
                                                         
                                                     </div>
                                                     <button

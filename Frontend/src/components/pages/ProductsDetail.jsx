@@ -23,11 +23,13 @@ export default function ProductsDetail() {
         }
         axios.get('http://localhost:8080/api/products/prodID/'+id).then(response => {
             setProduct(response.data);
+            //setItems(product.images);
             //console.log(response.data);
         });
     }, [id]);
 
     //FOR RANDOM IMAGES, WILL DELETE 
+    /*
     useEffect(() => {
         fetch('https://picsum.photos/v2/list?page=5&limit=10')
             .then((res) => res.json())
@@ -35,6 +37,8 @@ export default function ProductsDetail() {
                 setItems(data);
             });
     }, []);
+    */
+    
 
     if (!product) {
         return 'cannot fetch from database';
@@ -51,8 +55,8 @@ export default function ProductsDetail() {
                 <Grid item xs={6}> 
                     <Box> 
                         <Carousel>
-                            {items.map( item => (
-                                <Item key={item.id} item={item} />
+                            {product.images.map( item => (
+                                <Item item={item} />
                             ))}
                         </Carousel>
                     </Box>

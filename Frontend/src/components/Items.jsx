@@ -5,7 +5,7 @@ function Item({item})
 {
     return (
         <Paper>
-            <img src={item.download_url} width="675" height="500"/>
+            <img src={item} width="675" height="675"/>
         </Paper>
     )
 }

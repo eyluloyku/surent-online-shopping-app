@@ -46,7 +46,7 @@ function Navbar() {
     window.addEventListener(
         "resize",
         showButton
-    ); /*The resize event fires when the document view (window) has been resized.*/
+    ); 
 
     return (
         <>
@@ -84,12 +84,19 @@ function Navbar() {
 
                         </li>
                     </ul>
-                    {button ?
-                        accessToken ?
-                            <Link className="btn--outline" onClick={logout}>Logout</Link> :
-                            <Link to="/login" className="btn--outline"> Get Started </Link>
-                        : ""
-                    }
+                    {button ? (
+                        accessToken ? (
+                            <Button onClick={logout} buttonStyle="btn--outline">
+                            Logout
+                            </Button>
+                        ) : (
+                            <Button destination="/login" buttonStyle="btn--outline">
+                            Get Started
+                            </Button>
+                        )
+                        ) : (
+                        ""
+                        )}
                 </div>
             </nav>
         </>

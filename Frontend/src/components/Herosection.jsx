@@ -14,6 +14,7 @@ function Herosection() {
           className="btns"
           buttonStyle="btn--outline2"
           buttonSize="btn--large"
+          destination="Prods"
         >
           EXPERIENCE CHICNESS
         </Button>
