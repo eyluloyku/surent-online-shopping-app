@@ -37,7 +37,9 @@ function ReviewSubmit(props) {
     const handleChangeComment = (event) => {
         setComment(event.target.value)
     }
-
+    if (!product) {
+        return 'cannot fetch from database';
+    }
     const handleReviewSubmit = async (event) => {
         setError("")
         event.preventDefault();
