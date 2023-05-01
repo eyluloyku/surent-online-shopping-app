@@ -15,13 +15,13 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" exact Component={Home}></Route>
-          <Route path="/Products" exact Component={Productlisting}></Route>
-          <Route path ="/Register" exact Component={LoginRegister}></Route>
+          <Route path="/" element={<Home/>} />
+          <Route path="/Products" element={<Productlisting/>} />
+          <Route path ="/Register" element={<LoginRegister/>} />
           <Route path="/products/:id" element={<ProductsDetail/>} />
-          <Route path="/register" exact Component={LoginRegister}></Route>
-          <Route path="/login" exact Component={LoginRegister}></Route>
-          <Route path="/ReviewSubmit/:id" exact Component={ReviewSubmit}></Route>
+          <Route path="/register" element={<LoginRegister/>} />
+          <Route path="/login" element={<LoginRegister/>} />
+          <Route path="/ReviewSubmit/:id" element={<ReviewSubmit/>} />
         </Routes>
       </Router>
     </div>
