@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 
-.btn--primart {
+.btn--primary {
   /*css class created inside the button component*/
   background-color: var(--primary);
   color: #ccd5ae; /* consider #242424 */
@@ -30,6 +30,13 @@
   padding: 8px 20px;
   border: 1px solid #fff;
   transition: all 0.25s ease-out;
+}
+
+.btn--nooutline{
+  background-color: transparent;
+  color: #242424;
+  padding: 8px 20px;
+  border: none;
 }
 
 .btn--medium {

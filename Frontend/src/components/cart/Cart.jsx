@@ -134,8 +134,8 @@ const Cart = () => {
 
     return (
         <div>
-            <button className="btn--outline" onClick={handleShow}>
-                Cart
+            <button className="btn--nooutline" onClick={handleShow}>
+                <i class="fas fa-shopping-cart"></i>
             </button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
