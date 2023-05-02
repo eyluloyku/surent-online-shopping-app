@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import "./Navbar.css";
 import {Button} from "./Button";
 
+import Cart from "./cart/Cart";
 /* this app uses font awesome and some free videos and pictures provided by pexels */
 
 function Navbar() {
@@ -24,6 +25,8 @@ function Navbar() {
         setAccessToken(null);
         navigate('/login');
         localStorage.removeItem("token")
+        localStorage.removeItem("userId")
+        localStorage.removeItem("isCustomer")
         window.location.reload()
     };
 
@@ -73,6 +76,14 @@ function Navbar() {
                                 onClick={closeMobileMenu}
                             >
                                 Products
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-links"
+                                onClick={closeMobileMenu}
+                             to={Cart}>
+                                <Cart/>
                             </Link>
                         </li>
                         <li className="nav-item">
