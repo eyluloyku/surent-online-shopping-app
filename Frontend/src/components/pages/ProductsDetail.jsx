@@ -16,6 +16,7 @@ export default function ProductsDetail() {
     const {id} = useParams();
     const [product, setProduct] = useState(null);
     const [items, setItems] = useState([]); //for carousel 
+    const [alertMessage, setAlertMessage] = useState("");
 
     useEffect(() => {
         if (!id){
@@ -43,6 +44,30 @@ export default function ProductsDetail() {
     if (!product) {
         return 'cannot fetch from database';
     }
+    
+    const handleAddToCart = async () => {
+
+        let {userId} = localStorage;
+        try {
+            await axios.post('http://localhost:8080/api/addToCart', {
+                productId: product._id
+            }, {
+                headers: {
+                    userId: userId,
+                }
+            });
+
+            setAlertMessage(<div className="alert alert-success alert-dismissible fade show" role="alert">Product added
+                to cart successfully!</div>);
+        } catch (error) {
+            setAlertMessage(<div className="alert alert-danger alert-dismissible fade show" role="alert">Failed to add
+                product to cart.</div>);
+        }
+    }
+
+    setTimeout(function () {
+        setAlertMessage('');
+    }, 5000);
 
     //HAS INTERNAL CSS, COME BACK!!!
     return(
@@ -110,12 +135,13 @@ export default function ProductsDetail() {
                     </Box>
                     <Box p={2}>
                         {product.stock > 0 ? (
-                        <Button variant="contained" startIcon={<AddShoppingCartIcon />}>Add to Cart</Button>  
+                        <Button variant="contained" onClick={handleAddToCart} startIcon={<AddShoppingCartIcon />}>Add to Cart</Button>  
                         ): (
                         <Button variant="contained" color="error" startIcon={<AddShoppingCartIcon />} disabled>Out of Stock</Button>  
                         )
                         }
                     </Box>
+                    <div className="alert-message">{alertMessage}</div>
                     
                 </Grid>
             </Grid>

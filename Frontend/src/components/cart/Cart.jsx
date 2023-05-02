@@ -120,7 +120,7 @@ const Cart = () => {
 
 
     const handleCheckout = () => {
-        const isCustomer = localStorage.getItem('isCustomer');
+        const isCustomer = localStorage.getItem('token');
         if (!isCustomer) {
             navigate("/login");
             localStorage.setItem("updateCart", "true");
