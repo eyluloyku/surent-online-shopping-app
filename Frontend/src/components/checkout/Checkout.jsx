@@ -1,11 +1,12 @@
 import React from 'react';
+import Form from "../Form";
+import "../Form.css";
 
 function Checkout()  {
    
     return (
-      <div>
-        
-        <p>Coming Soon</p>
+      <div className='checkout'>
+        <Form></Form>
       </div>
     );
   
