@@ -14,19 +14,19 @@ function Carousel() {
               src="images/img1.jpg"
               text="Elevate your street style with our luxurious hoodies, designed for effortless comfort and sophistication."
               label="Urban"
-              path="/products"
+              path="/category/urban"
             />
             <Carditems
               src="images/img2.jpg"
               text="Experience luxury at its finest with our premium high-end bag collection!"
-              label="Tote Bags"
-              path="/products"
+              label="bags"
+              path="/category/bags"
             />
             <Carditems
               src="images/img3.jpg"
               text="Indulge in the luxurious comfort of our premium t-shirts, crafted with the finest materials and attention to detail."
               label="t-shirts"
-              path="/products"
+              path="/category/t-shirt"
             />
           </ul>
         </div>
@@ -36,19 +36,19 @@ function Carousel() {
               src="images/img4.jpg"
               text="Unleash your inner elegance with our exquisite shoe collection, crafted with perfection in every step"
               label="Shoes"
-              path="/products"
+              path="/category/shoes"
             />
             <Carditems
               src="images/img5.jpg"
               text="Elevate your style with our luxurious dress collection, designed to enhance your natural beauty and sophistication"
               label="Dresses"
-              path="/products"
+              path="/category/dresses"
             />
             <Carditems
               src="images/img6.jpg"
               text="Elevate your style and confidence with our luxurious suits, crafted with meticulous attention to detail."
               label="Suits"
-              path="/products"
+              path="/category/suit"
             />
           </ul>
         </div>

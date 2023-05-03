@@ -50,8 +50,14 @@ const getProductByName = async (req, res) => {
 
 const getProductByCategory = async (req, res) => {
     try {
-      const { Category } = req.query;
-      const tprods = await Product.find({ Category });
+      var Category  = req.params.category;
+      const tprods = await Product.aggregate([
+        {
+          $match: {
+            category: { $regex: new RegExp(Category, 'i') }
+          }
+        }
+      ]);
   
       if (!tprods.length) {
         return res.status(404).json({ error: "No products with matching category found." });

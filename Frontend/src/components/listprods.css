@@ -2,6 +2,7 @@
     columns: 4;
     -webkit-columns: 4;
     margin: 1.5em;
+
 }
 
 @media screen and (max-width: 768px){
@@ -9,5 +10,6 @@
         columns: 2;
         -webkit-columns: 2;
         margin: 2.5em;
+
     }
 }

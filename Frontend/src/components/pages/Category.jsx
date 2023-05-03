@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Footer from '../Footer'
-import ListSortProds from '../listSortProducts'
+import ListCategoryProds from '../listCategoryProducts'
 import "./Productlisting.css";
 
 
@@ -78,7 +78,7 @@ export default function Productlisting() {
 
 
 
-        <ListSortProds></ListSortProds>
+        <ListCategoryProds></ListCategoryProds>
         <div className='footer'>
           <Footer></Footer>
         </div>

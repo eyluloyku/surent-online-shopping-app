@@ -5,7 +5,7 @@ import "./Productlisting.css";
 
 
 export default function Productlisting() {
-
+  console.log(window.location.href)
   const [searchValue, setSearchValue] = useState('');
 
   const handleSubmit = (event) => {
@@ -18,6 +18,11 @@ export default function Productlisting() {
   const handleSearchValueChange = (event) => {
     setSearchValue(event.target.value);
   };
+
+  function handleCategoryClick (text) {
+    window.location.href = `/category/${text}`;
+  };
+  window.scrollTo(0, 0);
 
   return (
 
@@ -35,6 +40,19 @@ export default function Productlisting() {
             <button type='submit'><img src="/icons/search.png" alt="." /></button>
           </form>
           
+
+          <div className='category-selection'>
+            <button className='category-button' onClick={() => handleCategoryClick("urban")}>Urban</button>
+            <button className='category-button' onClick={() => handleCategoryClick("suit")}>Suit</button>
+            <button className='category-button' onClick={() => handleCategoryClick("shoes")}>Shoes</button>
+            <button className='category-button' onClick={() => handleCategoryClick("pants")}>Pants</button>
+            <button className='category-button' onClick={() => handleCategoryClick("dress")}>Dress</button>
+            <button className='category-button' onClick={() => handleCategoryClick("t-shirt")}>T-Shirt</button>
+            <button className='category-button' onClick={() => handleCategoryClick("hat")}>Hat</button>
+            <button className='category-button' onClick={() => handleCategoryClick("bag")}>Bag</button>
+          </div>
+
+
           <div className="sort">
             <h6 className='sorttext'>Sort by</h6>
             <form className='sort-bar'>
@@ -52,6 +70,8 @@ export default function Productlisting() {
               </button>
             </form>
           </div>
+
+
 
 
         </div>
