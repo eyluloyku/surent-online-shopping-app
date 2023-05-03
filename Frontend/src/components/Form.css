@@ -125,7 +125,7 @@
   font-size: 20px;
 }
 
-select{
+.other-info-container select{
     margin: 5px;
     width: 11em;
     height: 40px;
@@ -133,11 +133,11 @@ select{
     font-size: 20px;
 }
 
-input, select {
+.paymentFormInput, .other-info-container select {
   border: 2px solid yellow;
   border-radius: 5px;
 }
 
-input:focus, select:focus {
+.paymentFormInput:focus, .other-info-container select:focus {
   border: 3px solid green;
 }

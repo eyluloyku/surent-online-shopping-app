@@ -24,7 +24,7 @@ function PaymentInfo({ formData, setFormData }) {
         focused={focus}
       />
       <form>
-        <input
+        <input className="paymentFormInput"
           type='tel'
           name='cardNum'
           placeholder='Card Number'
@@ -32,7 +32,7 @@ function PaymentInfo({ formData, setFormData }) {
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
         />
-        <input
+        <input className="paymentFormInput"
           type='text'
           name='name'
           placeholder='Name'
@@ -40,7 +40,7 @@ function PaymentInfo({ formData, setFormData }) {
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
         />
-        <input
+        <input className="paymentFormInput"
           type='text'
           name='expiry'
           placeholder='MM/YY Expiry'
@@ -48,7 +48,7 @@ function PaymentInfo({ formData, setFormData }) {
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
         />
-        <input
+        <input className="paymentFormInput"
           type='tel'
           name='cvc'
           placeholder='CVC'

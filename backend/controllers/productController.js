@@ -186,6 +186,72 @@ const getProductReviews = async (req, res) => {
   })
 }
 
+const sortByPriceAscending = async (req, res) => {
+  try {
+      //well originally find was used but then found this method that was more efficient.
+    const tprods = await Product.aggregate([
+      {
+        $project: {
+          _id: 1,
+          Pname: 1,
+          price: 1,
+          stock: 1,
+          variants: 1,
+          description: 1,
+          warranty: 1,
+          Distribution_inf: 1,
+          Discount_rate: 1,
+          category: 1,
+          rating: 1
+        }
+      },
+      {
+        $sort: {
+          price: 1
+        }
+      }
+    ]);
+
+    res.status(200).json(tprods);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const sortByRatingAscending = async (req, res) => {
+  try {
+      //well originally find was used but then found this method that was more efficient.
+    const tprods = await Product.aggregate([
+      {
+        $project: {
+          _id: 1,
+          Pname: 1,
+          price: 1,
+          stock: 1,
+          variants: 1,
+          description: 1,
+          warranty: 1,
+          Distribution_inf: 1,
+          Discount_rate: 1,
+          category: 1,
+          rating: 1
+        }
+      },
+      {
+        $sort: {
+          rating: 1
+        }
+      }
+    ]);
+
+    res.status(200).json(tprods);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export {
     createProd,
     getAllProds,
@@ -195,5 +261,7 @@ export {
     deleteProduct,
     updateProduct,
     createProductReview,
-    getProductReviews
+    getProductReviews,
+    sortByPriceAscending,
+    sortByRatingAscending
 };

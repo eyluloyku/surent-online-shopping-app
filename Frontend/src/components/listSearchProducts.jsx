@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import './listprods.css';
-
 import { useParams } from 'react-router-dom';
 
 function ListProds() {
@@ -26,12 +25,18 @@ function ListProds() {
   }, [id]);
 
   if (notFound) {
-    return (<h2 style={{ textAlign: "center", margin: "auto", padding: 45 }}>Sorry, nothing is found...</h2>)
+    return (
+      <div className='container'>
+        <h5>Searched text: {id}</h5>
+        <h2 style={{ textAlign: "center", margin: "auto", padding: 45 }}>Sorry, nothing is found...</h2>
+      </div>
+    );
   }
 
   return (
     <div>
       <div className="container">
+      <h5>Searched text: {id}</h5>
         <ul className="columnList">
           {data.map(item => (
             <li key={item._id}>

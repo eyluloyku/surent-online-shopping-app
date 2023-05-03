@@ -23,7 +23,7 @@ export default function Productlisting() {
 
     <div className='listed-prods'>
 
-        <div className='container'>
+        <div className='productsContainer'>
           <form onSubmit={handleSubmit} className='search-bar' >
             <input 
             type='text' 
@@ -34,7 +34,26 @@ export default function Productlisting() {
             </input>
             <button type='submit'><img src="/icons/search.png" alt="." /></button>
           </form>
-                      
+          
+          <div className="sort">
+            <h6 className='sorttext'>Sort by</h6>
+            <form className='sort-bar'>
+              <select id='sorting' className='sort-option'>
+                <option value="/sort/price">Price</option>
+                <option value="/sort/rating">Rating</option>
+              </select>
+              <button type='submit' onClick={(e) => {
+                e.preventDefault(); 
+                const selectedValue = document.getElementById('sorting').value; // Get the value of the selected option
+                window.location.href = selectedValue;
+
+              }}>
+                <img src="/icons/check-box.png" alt="." />
+              </button>
+            </form>
+          </div>
+
+
         </div>
 
 

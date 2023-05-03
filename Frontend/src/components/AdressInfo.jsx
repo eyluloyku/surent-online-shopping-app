@@ -20,7 +20,7 @@ function AdressInfo({ formData, setFormData }) {
           </option>
         ))}
       </select>
-      <input
+      <input className="paymentFormInput"
         type="text"
         placeholder="Telephone"
         value={formData.Telephone}
@@ -28,7 +28,7 @@ function AdressInfo({ formData, setFormData }) {
           setFormData({ ...formData, Telephone: e.target.value });
         }}
       />
-      <input
+      <input className="paymentFormInput"
         type="text"
         placeholder="City"
         value={formData.City}
@@ -36,7 +36,7 @@ function AdressInfo({ formData, setFormData }) {
           setFormData({ ...formData, City: e.target.value });
         }}
       />
-      <input
+      <input className="paymentFormInput"
         type="text"
         placeholder="Zip-code"
         value={formData.Zipcode}

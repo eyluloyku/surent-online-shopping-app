@@ -10,10 +10,12 @@ body{
     margin-top: 50%;
 }
 
-.container {
+.productsContainer {
     background-image: linear-gradient(rgba(0,8,51,0,9),rgba(0,8,51,0,9));
     background-size: cover;
     padding: 20px;
+    display: flex;
+    padding-left: 360px;
 }
 
 .search-bar{
@@ -49,6 +51,43 @@ body{
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    background: linear-gradient(90deg, rgb(233, 237, 201) 0%, #f1dec9 100%);;
+    background: linear-gradient(90deg, rgb(233, 237, 201) 0%, #f1dec9 100%);
     cursor: pointer;
+}
+
+
+
+
+.sort{
+    width: 100%;
+    max-width: 230px;
+    max-height: 80px;
+    background: #ECECEC;
+    display: flex;
+    border-radius: 60px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.sorttext{
+    margin-top: 7px;
+    padding: 8px;
+    font-size: 17px;
+}
+
+.sort-option{
+    padding: 2px;
+}
+
+.sort-bar button {
+    background: linear-gradient(90deg, rgb(233, 237, 201) 0%, #f1dec9 100%);
+    border: none;
+    margin-left: 8px;
+
+}
+
+.sort-bar button img{
+    width: 28px;
+    padding-bottom: 2px;
 }

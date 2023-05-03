@@ -11,6 +11,7 @@ import LoginwFooter from "./components/pages/LoginwFooter";
 import ProductSearch from "./components/pages/Search";
 import Checkout from "./components/checkout/Checkout";
 import Cart from "./components/cart/Cart";
+import Sort from "./components/pages/Sort";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<LoginwFooter/>} />
           <Route path="/ReviewSubmit/:id" element={<ReviewSubmit/>} />
 	        <Route path="/search/:id" element={<ProductSearch/>} />
+          <Route path="/sort/:id" element={<Sort/>} />
           <Route path="/checkout" exact element={<Checkout/>}></Route>
           <Route path="/CheckoutPage" exact element={<Cart/>}></Route>
         </Routes>

@@ -11,7 +11,9 @@ import {
     deleteProduct,
     updateProduct,
     createProductReview,
-    getProductReviews
+    getProductReviews,
+    sortByPriceAscending,
+    sortByRatingAscending
 } from "../controllers/productController.js"
 
 const router = Router();
@@ -34,5 +36,8 @@ router.patch('/update/:id',updateProduct)
 router.post('/postReview/:id', auth, createProductReview);
 
 router.get('/getReview/:id', getProductReviews);
+
+router.get('/sort/price', sortByPriceAscending)
+router.get('/sort/rating', sortByRatingAscending)
 
 export {router};
