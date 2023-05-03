@@ -34,21 +34,6 @@ const getProductByName = async (req, res) => {
           $match: {
             Pname: { $regex: new RegExp(name, 'i') }
           }
-        },
-        {
-          $project: {
-            _id: 1,
-            Pname: 1,
-            price: 1,
-            stock: 1,
-            variants: 1,
-            description: 1,
-            warranty: 1,
-            Distribution_inf: 1,
-            Discount_rate: 1,
-            category: 1,
-            rating: 1
-          }
         }
       ]);
   
@@ -191,21 +176,6 @@ const sortByPriceAscending = async (req, res) => {
       //well originally find was used but then found this method that was more efficient.
     const tprods = await Product.aggregate([
       {
-        $project: {
-          _id: 1,
-          Pname: 1,
-          price: 1,
-          stock: 1,
-          variants: 1,
-          description: 1,
-          warranty: 1,
-          Distribution_inf: 1,
-          Discount_rate: 1,
-          category: 1,
-          rating: 1
-        }
-      },
-      {
         $sort: {
           price: 1
         }
@@ -223,21 +193,6 @@ const sortByRatingAscending = async (req, res) => {
   try {
       //well originally find was used but then found this method that was more efficient.
     const tprods = await Product.aggregate([
-      {
-        $project: {
-          _id: 1,
-          Pname: 1,
-          price: 1,
-          stock: 1,
-          variants: 1,
-          description: 1,
-          warranty: 1,
-          Distribution_inf: 1,
-          Discount_rate: 1,
-          category: 1,
-          rating: 1
-        }
-      },
       {
         $sort: {
           rating: 1
