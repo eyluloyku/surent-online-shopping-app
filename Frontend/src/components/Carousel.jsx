@@ -20,7 +20,7 @@ function Carousel() {
               src="images/img2.jpg"
               text="Experience luxury at its finest with our premium high-end bag collection!"
               label="bags"
-              path="/category/bags"
+              path="/category/bag"
             />
             <Carditems
               src="images/img3.jpg"
@@ -42,7 +42,7 @@ function Carousel() {
               src="images/img5.jpg"
               text="Elevate your style with our luxurious dress collection, designed to enhance your natural beauty and sophistication"
               label="Dresses"
-              path="/category/dresses"
+              path="/category/dress"
             />
             <Carditems
               src="images/img6.jpg"
