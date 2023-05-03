@@ -53,7 +53,7 @@ export default function MultiActionAreaCard({item}) {
                     <CardMedia
                         component="img"
                         height="210"
-                        image="https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg"
+                        image={item.images[0]}
                         alt="Product"
                     />
                     <CardContent>
@@ -61,7 +61,7 @@ export default function MultiActionAreaCard({item}) {
                             {item.Pname}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {item.description}
+                            ${item.price}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
