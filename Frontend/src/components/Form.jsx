@@ -51,6 +51,7 @@ function Form({cartData}) {
             disabled={page == 0}
             onClick={() => {
               setPage((currPage) => currPage - 1);
+              // updated new data 
             }}
           >
             Prev
