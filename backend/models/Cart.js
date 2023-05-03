@@ -35,6 +35,7 @@ cartSchema.pre('save', async function (next) {
             this.products[i].Pname = product.Pname;
             this.products[i].price = product.price;
             total += (product.price * this.products[i].quantity);
+            // changed the math 
         }
         this.totalPrice = total;
         next();
