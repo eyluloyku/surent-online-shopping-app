@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
 
 
 const InvoicePDF = {
-  async generateInvoice(data) {
-    const blob = await pdf(<InvoiceDocument data={data} />).toBlob();
+  async generateInvoice(data, cartItems) {
+    const blob = await pdf(<InvoiceDocument data={data} cartItems={cartItems} />).toBlob();
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = `Invoice-${data.invoiceNumber}.pdf`;
@@ -70,7 +70,7 @@ const InvoicePDF = {
   },
 };
 
-const InvoiceDocument = ({ data }) => (
+const InvoiceDocument = ({ data, cartItems }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.coloredBar}></View>
@@ -123,17 +123,16 @@ const InvoiceDocument = ({ data }) => (
           <Text style={[styles.tableColumn, styles.label]}>Item</Text>
           <Text style={[styles.tableColumn, styles.label]}>Price</Text>
         </View>
-        {/* Add dummy items */}
-        <View style={styles.tableRow}>
-          <Text style={[styles.tableColumn, styles.value]}>Item 1</Text>
-          <Text style={[styles.tableColumn, styles.value]}>$10.00</Text>
-        </View>
-        <View style={styles.tableRow}>
-          <Text style={[styles.tableColumn, styles.value]}>Item 2</Text>
-          <Text style={[styles.tableColumn, styles.value]}>$20.00</Text>
-        </View>
+        {cartItems.map((item, index) => (
+          <View key={item._id} style={styles.tableRow}>
+            <Text style={[styles.tableColumn, styles.value]}>{item.Pname}</Text>
+            <Text style={[styles.tableColumn, styles.value]}>${item.price.toFixed(2)}</Text>
+          </View>
+        ))}
       </View>
-      <Text style={styles.totalPrice}>Total Price: $30.00</Text>
+      <Text style={styles.totalPrice}>
+        Total Price: ${cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}
+      </Text>
     </Page>
   </Document>
 );

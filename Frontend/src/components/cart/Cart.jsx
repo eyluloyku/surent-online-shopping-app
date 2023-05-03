@@ -4,7 +4,7 @@ import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
 import "./Cart.css";
 
-const Cart = () => {
+const Cart = ({setCartData}) => {
     const [show, setShow] = useState(false);
     const [cart, setCart] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -40,6 +40,7 @@ const Cart = () => {
             setCart(response.data);
             localStorage.setItem("cartId", response.data._id)
             setLoading(false);
+            setCartData(response.data);
         } catch (error) {
             setLoading(false);
         }

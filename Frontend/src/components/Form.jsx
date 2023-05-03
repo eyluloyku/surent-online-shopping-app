@@ -5,7 +5,7 @@ import AdressInfo from "./AdressInfo";
 import InvoicePDF from './InvoicePDF';
 import "./Form.css"
 
-function Form() {
+function Form({cartData}) {
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({
     country:"",
@@ -56,9 +56,10 @@ function Form() {
             Prev
           </button>
           <button
+            disabled={!cartData} // Disable the button if the cart data is not available or still loading
             onClick={() => {
               if (page === FormTitles.length - 1) {
-                InvoicePDF.generateInvoice(formData);
+                InvoicePDF.generateInvoice(formData, cartData.products);
               } else {
                 setPage((currPage) => currPage + 1);
               }
