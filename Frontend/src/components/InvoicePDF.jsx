@@ -121,17 +121,19 @@ const InvoiceDocument = ({ data, cartItems }) => (
         <Text style={styles.sectionTitle}>Items</Text>
         <View style={styles.tableHeader}>
           <Text style={[styles.tableColumn, styles.label]}>Item</Text>
+          <Text style={[styles.tableColumn, styles.label]}>Quantity</Text>
           <Text style={[styles.tableColumn, styles.label]}>Price</Text>
         </View>
         {cartItems.map((item, index) => (
           <View key={item._id} style={styles.tableRow}>
             <Text style={[styles.tableColumn, styles.value]}>{item.Pname}</Text>
+            <Text style={[styles.tableColumn, styles.value]}>{item.quantity}</Text>
             <Text style={[styles.tableColumn, styles.value]}>${item.price.toFixed(2)}</Text>
           </View>
         ))}
       </View>
       <Text style={styles.totalPrice}>
-        Total Price: ${cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}
+        Total Price: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
       </Text>
     </Page>
   </Document>
