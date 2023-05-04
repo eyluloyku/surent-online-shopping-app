@@ -61,6 +61,7 @@ function LoginRegister(props) {
             });
 
             localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('userId', response.data.userId);
             navigate('/');
             window.location.reload()
         } catch (error) {

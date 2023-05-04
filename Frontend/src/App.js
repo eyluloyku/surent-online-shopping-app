@@ -11,6 +11,7 @@ import LoginwFooter from "./components/pages/LoginwFooter";
 import ProductSearch from "./components/pages/Search";
 import Checkout from "./components/checkout/Checkout";
 import Cart from "./components/cart/Cart";
+import Orders from "./components/pages/OrderListing";
 import Sort from "./components/pages/Sort";
 import Category from "./components/pages/Category";
 
@@ -29,11 +30,12 @@ function App() {
           <Route path="/register" element={<LoginwFooter/>} />
           <Route path="/login" element={<LoginwFooter/>} />
           <Route path="/ReviewSubmit/:id" element={<ReviewSubmit/>} />
+          <Route path="/GetOrders/:id" element={<Orders/>} />
 	        <Route path="/search/:id" element={<ProductSearch/>} />
-          <Route path="/sort/:id" element={<Sort/>} />
-          <Route path="/category/:id" element={<Category/>} />
           <Route path="/checkout" exact element={<Checkout/>}></Route>
           <Route path="/CheckoutPage" exact element={<Cart/>}></Route>
+          <Route path="/sort/:id" element={<Sort/>} />
+          <Route path="/category/:id" element={<Category/>} />
         </Routes>
       </Router>
     </div>

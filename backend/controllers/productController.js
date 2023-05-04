@@ -38,15 +38,26 @@ const getProductByName = async (req, res) => {
       ]);
   
       if (!tprods.length) {
-        return res.status(404).json({ error: "No products with matching name found." });
+        const ttprods = await Product.aggregate([
+          {
+            $match: {
+              description: { $regex: new RegExp(name, 'i') }
+            }
+          }
+        ]);
+        if (!ttprods.length) {
+          return res.status(404).json({ error: "No products with matching name found." });
+        }
+        res.status(200).json(ttprods);
+      }else {
+        res.status(200).json(tprods);
       }
-  
-      res.status(200).json(tprods);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
     }
   };
+
 
 const getProductByCategory = async (req, res) => {
     try {

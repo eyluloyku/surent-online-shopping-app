@@ -9,8 +9,12 @@ function ReviewSubmit(props) {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const {id} = useParams();
-    const [accessToken, setAccessToken] = useState(true);
     const [product, setProduct] = useState(null);
+    const [accessToken, setAccessToken] = useState(true);
+
+    useEffect(() => {
+        setAccessToken(localStorage.getItem("token"));
+    }, [accessToken]);
 
     useEffect(() => {
         if (!id){
@@ -21,10 +25,6 @@ function ReviewSubmit(props) {
             //console.log(response.data);
         });
     }, [id]);
-
-    useEffect(() => {
-        setAccessToken(localStorage.getItem("token"));
-    }, [accessToken]);
 
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
@@ -55,8 +55,7 @@ function ReviewSubmit(props) {
               {headers: {
                 'x-access-token': accessToken,
                 'Content-Type': 'application/json'
-              }
-              });
+              }} );
             setMessage("Your review will be posted when approved.");
             navigate('/products/'+id);
             window.location.reload()
@@ -79,7 +78,7 @@ function ReviewSubmit(props) {
                                         <div className="card-front">
                                             <div className="center-wrap">
                                                 <div className="section text-center">
-                                                    <h4 className="mb-4 pb-3">Review for {product.Pname}</h4>
+                                                    <h4 className="mb-1 pb-1">Review for {product.Pname}</h4>
                                                     <img src={product.images[0]} class="img-thumbnail"></img>
                                                     {error ? <div className="alert alert-danger">{error} </div> : ""}
                                                     {message ? <div className="alert alert-danger">{message} </div> : ""}

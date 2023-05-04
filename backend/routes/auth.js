@@ -61,10 +61,11 @@ router.post("/logIn", cors(), async (req, res) => {
 				.json({error: true, message: "Invalid email or password"});
 
 		const {accessToken, refreshToken} = await generateTokens(user);
-
 		res.status(200).json({
 			error: false,
 			accessToken,
+			refreshToken,
+			userId: user.id,
 			refreshToken,
 			message: "Logged in sucessfully",
 		});

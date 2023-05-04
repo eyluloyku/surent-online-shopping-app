@@ -12,7 +12,8 @@ function Navbar() {
     const [button, setButton] = useState(true);
     const [accessToken, setAccessToken] = useState(true);
     const navigate = useNavigate();
-
+    const [userId, setUserId] = useState("");
+    
     const handleClick = () => {
         setClick(!click); /* reverse the value whenever you click it*/
     };
@@ -45,6 +46,9 @@ function Navbar() {
     useEffect(() => {
         setAccessToken(localStorage.getItem("token"));
     }, [accessToken]);
+    useEffect(() => {
+        setUserId(localStorage.getItem('userId'));
+    });
 
     window.addEventListener(
         "resize",
@@ -94,6 +98,17 @@ function Navbar() {
                                     Started </Link>}
 
                         </li>
+                        {accessToken? (
+                        <li className="nav-item">
+                            <Link
+                                to= {"/GetOrders/"+userId}
+                                className="nav-links"
+                                onClick={closeMobileMenu}
+                            >
+                                Orders
+                            </Link>
+                        </li>
+                        ):<></>}
                     </ul>
                     {button ? (
                         accessToken ? (
