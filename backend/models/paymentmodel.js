@@ -6,6 +6,7 @@ const paymentMethodSchema = new mongoose.Schema({
   method: {
     type: String,
     enum: ['credit-card', 'debit-card', 'paypal', 'google-pay', 'apple-pay'],
+    default: 'credit-card',
     required: true
   },
   cardHolderName: {
@@ -20,23 +21,13 @@ const paymentMethodSchema = new mongoose.Schema({
       return this.method === 'credit-card' || this.method === 'debit-card';
     }
   },
-  expiryMonth: {
+  expiry: {
     type: Number,
-    min: 1,
-    max: 12,
     required: function() {
       return this.method === 'credit-card' || this.method === 'debit-card';
     }
   },
-  expiryYear: {
-    type: Number,
-    min: new Date().getFullYear(),
-    max: new Date().getFullYear() + 10,
-    required: function() {
-      return this.method === 'credit-card' || this.method === 'debit-card';
-    }
-  },
-  cvv: {
+  cvc: {
     type: String,
     required: function() {
       return this.method === 'credit-card' || this.method === 'debit-card';

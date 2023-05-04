@@ -23,25 +23,49 @@ function AdressInfo({ formData, setFormData }) {
       <input className="paymentFormInput"
         type="text"
         placeholder="Telephone"
-        value={formData.Telephone}
+        value={formData.phoneNumber}
         onChange={(e) => {
-          setFormData({ ...formData, Telephone: e.target.value });
+          setFormData({ ...formData, phoneNumber: e.target.value });
         }}
       />
       <input className="paymentFormInput"
         type="text"
         placeholder="City"
-        value={formData.City}
+        value={formData.city}
         onChange={(e) => {
-          setFormData({ ...formData, City: e.target.value });
+          setFormData({ ...formData, city: e.target.value });
+        }}
+      />
+      <input className="paymentFormInput"
+        type="text"
+        placeholder="State"
+        value={formData.state}
+        onChange={(e) => {
+          setFormData({ ...formData, state: e.target.value });
+        }}
+      />
+      <input className="paymentFormInput"
+        type="text"
+        placeholder="Address Line 1"
+        value={formData.addressLine1}
+        onChange={(e) => {
+          setFormData({ ...formData, addressLine1: e.target.value });
+        }}
+      />
+      <input className="paymentFormInput"
+        type="text"
+        placeholder="Address Line 2"
+        value={formData.addressLine2}
+        onChange={(e) => {
+          setFormData({ ...formData, addressLine2: e.target.value });
         }}
       />
       <input className="paymentFormInput"
         type="text"
         placeholder="Zip-code"
-        value={formData.Zipcode}
+        value={formData.postalCode}
         onChange={(e) => {
-          setFormData({ ...formData, Zipcode: e.target.value });
+          setFormData({ ...formData, postalCode: e.target.value });
         }}
       />
     </div>

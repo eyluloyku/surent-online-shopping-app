@@ -5,20 +5,13 @@ function SignUpInfo({ formData, setFormData }) {
     <div className="sign-up-container">
       <input className="paymentFormInput"
         type="text"
-        placeholder="Name"
-        value={formData.name}
+        placeholder="Full Name"
+        value={formData.fullName}
         onChange={(event) =>
-          setFormData({ ...formData, name: event.target.value })
+          setFormData({ ...formData, fullName: event.target.value })
         }
       />
-      <input className="paymentFormInput"
-        type="text"
-        placeholder="Lastname"
-        value={formData.lastName}
-        onChange={(event) =>
-          setFormData({ ...formData, lastName: event.target.value })
-        }
-      />
+
       <input className="paymentFormInput"
         type="text"
         placeholder="Email..."
@@ -27,14 +20,7 @@ function SignUpInfo({ formData, setFormData }) {
           setFormData({ ...formData, email: event.target.value })
         }
       />
-      <input className="paymentFormInput"
-        type="password"
-        placeholder="Password..."
-        value={formData.password}
-        onChange={(event) =>
-          setFormData({ ...formData, password: event.target.value })
-        }
-      />
+      
     </div>
   );
 }

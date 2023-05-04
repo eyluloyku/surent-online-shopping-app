@@ -90,7 +90,7 @@ const InvoiceDocument = ({ data, cartItems }) => (
         <Text style={styles.sectionTitle}>Client Information</Text>
         <View style={styles.row}>
           <Text style={styles.label}>Client Name:</Text>
-          <Text style={styles.value}>{data.name} {data.lastName}</Text>
+          <Text style={styles.value}>{data.fullName}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Email:</Text>
@@ -101,16 +101,16 @@ const InvoiceDocument = ({ data, cartItems }) => (
           <Text style={styles.value}>{data.country}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.label}>City:</Text>
-          <Text style={styles.value}>{data.City}</Text>
+          <Text style={styles.label}>Adress:</Text>
+          <Text style={styles.value}>{data.addressLine1} {data.addressLine2} {data.state} / {data.city}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Zipcode:</Text>
-          <Text style={styles.value}>{data.Zipcode}</Text>
+          <Text style={styles.value}>{data.postalCode}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Telephone:</Text>
-          <Text style={styles.value}>{data.Telephone}</Text>
+          <Text style={styles.value}>{data.phoneNumber}</Text>
         </View>
       </View>
       <View style={styles.section}>

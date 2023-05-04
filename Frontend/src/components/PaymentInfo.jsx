@@ -18,7 +18,7 @@ function PaymentInfo({ formData, setFormData }) {
 
       <Cards
         number={formData.cardNum}
-        name={formData.name}
+        name={formData.fullName}
         expiry={formData.expiry}
         cvc={formData.cvc}
         focused={focus}
@@ -36,7 +36,7 @@ function PaymentInfo({ formData, setFormData }) {
           type='text'
           name='name'
           placeholder='Name'
-          value={formData.name}
+          value={formData.fullName}
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
         />
