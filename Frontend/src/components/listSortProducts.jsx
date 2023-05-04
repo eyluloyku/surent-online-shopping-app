@@ -21,9 +21,9 @@ function ListProds() {
     },[]);
 
   return (
-    <div>
+    <div className='sort-page'>
         <div className="container">
-          <h5>Sorted by their {id}:</h5>
+          <h5>Sorted by their {id}: (descending)</h5>
             <ul className='columnList'>
               {data.map(item=>(
                 <li key={item._id}><ProductCard item={item} ></ProductCard></li>

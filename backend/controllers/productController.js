@@ -188,13 +188,13 @@ const getProductReviews = async (req, res) => {
   })
 }
 
-const sortByPriceAscending = async (req, res) => {
+const sortByPriceDescending = async (req, res) => {
   try {
       //well originally find was used but then found this method that was more efficient.
     const tprods = await Product.aggregate([
       {
         $sort: {
-          price: 1
+          price: -1
         }
       }
     ]);
@@ -206,13 +206,31 @@ const sortByPriceAscending = async (req, res) => {
   }
 };
 
-const sortByRatingAscending = async (req, res) => {
+const sortByRatingDescending = async (req, res) => {
   try {
       //well originally find was used but then found this method that was more efficient.
     const tprods = await Product.aggregate([
       {
         $sort: {
-          rating: 1
+          rating: -1
+        }
+      }
+    ]);
+
+    res.status(200).json(tprods);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const sortByPopularityDescending = async (req, res) => {
+  try {
+      //well originally find was used but then found this method that was more efficient.
+    const tprods = await Product.aggregate([
+      {
+        $sort: {
+          numOfReviews: -1
         }
       }
     ]);
@@ -234,6 +252,7 @@ export {
     updateProduct,
     createProductReview,
     getProductReviews,
-    sortByPriceAscending,
-    sortByRatingAscending
+    sortByPriceDescending,
+    sortByRatingDescending,
+    sortByPopularityDescending
 };

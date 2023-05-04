@@ -12,8 +12,9 @@ import {
     updateProduct,
     createProductReview,
     getProductReviews,
-    sortByPriceAscending,
-    sortByRatingAscending
+    sortByPriceDescending,
+    sortByRatingDescending,
+    sortByPopularityDescending
 } from "../controllers/productController.js"
 
 const router = Router();
@@ -37,7 +38,8 @@ router.post('/postReview/:id', auth, createProductReview);
 
 router.get('/getReview/:id', getProductReviews);
 
-router.get('/sort/price', sortByPriceAscending)
-router.get('/sort/rating', sortByRatingAscending)
+router.get('/sort/price', sortByPriceDescending)
+router.get('/sort/rating', sortByRatingDescending)
+router.get('/sort/popularity', sortByPopularityDescending)
 
 export {router};

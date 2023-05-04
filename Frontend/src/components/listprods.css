@@ -10,6 +10,27 @@
         columns: 2;
         -webkit-columns: 2;
         margin: 2.5em;
-
     }
+
+    /*For sorting page */
+    .columnList li{
+        flex-basis: calc(50% - 1em);
+    }
+}
+
+
+
+/*For sorting page */
+.sort-page .columnList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+}
+
+.sort-page .columnList li{
+    flex-basis: calc(25% - 1em);
+    margin-bottom: 2em;
 }

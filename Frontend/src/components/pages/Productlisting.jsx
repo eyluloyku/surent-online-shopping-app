@@ -59,6 +59,7 @@ export default function Productlisting() {
               <select id='sorting' className='sort-option'>
                 <option value="/sort/price">Price</option>
                 <option value="/sort/rating">Rating</option>
+                <option value="/sort/popularity">Popularity</option>
               </select>
               <button type='submit' onClick={(e) => {
                 e.preventDefault(); 
