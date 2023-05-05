@@ -65,7 +65,8 @@ const InvoicePDF = {
     const blob = await pdf(<InvoiceDocument data={data} cartItems={cartItems} />).toBlob();
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `Invoice-${data.invoiceNumber}.pdf`;
+    //link.download = `Invoice-${data.invoiceNumber}.pdf`;
+    link.target = '_blank'; // change download attribute to target="_blank"
     link.click();
   },
 };
