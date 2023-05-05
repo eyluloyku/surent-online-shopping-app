@@ -4,9 +4,12 @@ import PaymentInfo from "./PaymentInfo";
 import AdressInfo from "./AdressInfo";
 import InvoicePDF from './InvoicePDF';
 import "./Form.css"
+import axios, { formToJSON } from "axios";
+import {useNavigate} from "react-router-dom";
 
 function Form({cartData}) {
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -61,7 +64,34 @@ function Form({cartData}) {
             disabled={!cartData} // Disable the button if the cart data is not available or still loading
             onClick={() => {
               if (page === FormTitles.length - 1) {
+                var data = [];
+                cartData.products.forEach(prod => {
+                  var item = {
+                  product: prod.productId,
+                  quantity: prod.quantity,
+                  price: prod.price
+                }
+                data.push(item);
+                });
+
                 InvoicePDF.generateInvoice(formData, cartData.products);
+                axios.post("http://localhost:8080/api/orders/", {
+                  items: data,
+                  status: "processing",
+                  user: cartData.userId,
+                  shippingAddress: {
+                    fullName: formData.fullName,
+                    addressLine1: formData.addressLine1,
+                    addressLine2: formData.addressLine2,
+                    city: formData.city,
+                    state: formData.state,
+                    postalCode: formData.postalCode,
+                    country: formData.postalCode,
+                    phoneNumber: formData.phoneNumber
+                  },
+                  totalPrice: cartData.totalPrice
+                  });
+                  navigate('/GetOrders/'+ cartData.userId);
               } else {
                 setPage((currPage) => currPage + 1);
               }

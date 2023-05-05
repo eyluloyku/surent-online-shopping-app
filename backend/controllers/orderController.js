@@ -1,6 +1,8 @@
 import Order from '../models/Order.js'
 import User from '../models/User.js'
 import Product from '../models/productmodel.js';
+import nodemailer from 'nodemailer';
+import fs from 'fs'
 
 //get all orders of user
 const getOrders = async (req,res)=>{
@@ -39,4 +41,37 @@ const getOrders = async (req,res)=>{
     }
 }
 
-export {getOrders}
+
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  auth: {
+    user: 'ssurent2@gmail.com',
+    pass: 'rqmkwjzxcgojapnj',
+  }
+});
+
+const sendEmailWithPDF = (pdfBlob, userEmail) => {
+  const mailOptions = {
+    from: 'ssurent2@gmail.com',
+    to: "e.oyku.sen@gmail.com",
+    subject: 'Invoice PDF',
+    attachments: [
+      {
+        filename: 'Invoice.pdf',
+        content: pdfBlob
+      }
+    ]
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email: ', error);
+    } else {
+      console.log('Email sent: ', info.response);
+    }
+  });
+};
+
+export {getOrders, sendEmailWithPDF}

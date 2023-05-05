@@ -1,7 +1,7 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import Order from '../models/Order.js';
-import {getOrders} from '../controllers/orderController.js'
+import {getOrders, sendEmailWithPDF} from '../controllers/orderController.js'
 import Product from '../models/productmodel.js';
 const orderRouter = express.Router();
 
@@ -33,5 +33,7 @@ orderRouter.post(
 );
 
 orderRouter.get('/getOrders/:id', getOrders);
+orderRouter.post('/sendPDF', sendEmailWithPDF);
+
 
 export {orderRouter};

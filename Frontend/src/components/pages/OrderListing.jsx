@@ -84,7 +84,7 @@ function Orders() {
                             Quantity: <span>{item.quantity}  </span>
                           </p>
                           <p>Subtotal: $<span>{item.price * item.quantity}</span></p>
-                          
+                          {order.status === 'delivered' ? (
                           <button  onClick={() => handleReview(item.product)} style={{ 
                             backgroundColor: '#4CAF50',
                             border: 'none',
@@ -97,7 +97,7 @@ function Orders() {
                             margin: '10px 0 0 10px',
                             verticalAlign: 'middle'
                           }}>Review</button>
-                          
+                        ): (<></>)}
                           </div>
                         </Description>
                       </Product>

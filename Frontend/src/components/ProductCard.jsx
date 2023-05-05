@@ -66,9 +66,12 @@ export default function MultiActionAreaCard({item}) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary" onClick={handleAddToCart}>
-                        Add to Cart
-                    </Button>
+                {item.stock > 0 ? (
+                        <Button variant="contained" onClick={handleAddToCart} >Add to Cart</Button>  
+                        ): (
+                        <Button variant="contained" color="error" disabled>Out of Stock</Button>  
+                        )
+                        }
                 </CardActions>
             </Card>
         </ThemeProvider>
