@@ -13,7 +13,7 @@
 .btn--primary {
   /*css class created inside the button component*/
   background-color: var(--primary);
-  color: #ccd5ae; /* consider #242424 */
+  color: #ccd5ae; 
   border: 1px solid var(--primary);
 }
 

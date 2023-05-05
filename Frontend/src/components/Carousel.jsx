@@ -1,6 +1,6 @@
 import React from "react";
 import Carditems from "./Carditems";
-/*we might mvoe this to product page, we shall se xd */
+/*we might mvoe this to product page, we shall see xd */
 import "./Carousel.css";
 
 function Carousel() {
