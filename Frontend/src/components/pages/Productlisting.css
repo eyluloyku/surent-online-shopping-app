@@ -15,8 +15,7 @@ body{
     background-size: cover;
     padding: 20px;
     display: flex;
-    padding-left: 10%;
-    padding-right: 10%;
+    justify-content: center;
 }
 
 .search-bar{
