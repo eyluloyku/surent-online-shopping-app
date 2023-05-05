@@ -62,6 +62,11 @@ function LoginRegister(props) {
 
             localStorage.setItem('token', response.data.accessToken);
             localStorage.setItem('userId', response.data.userId);
+            axios.post("http://localhost:8080/api/updateCartUserId", {
+                cartId: localStorage.getItem('cartId')
+            }, {headers: {
+                userId: response.data.userId
+            }});
             navigate('/');
             window.location.reload()
         } catch (error) {
