@@ -91,7 +91,7 @@ function Form({cartData}) {
                   },
                   totalPrice: cartData.totalPrice
                   });
-                  navigate('/GetOrders'+ cartData.userId);
+                  navigate('/GetOrders/'+ cartData.userId);
               } else {
                 setPage((currPage) => currPage + 1);
               }
