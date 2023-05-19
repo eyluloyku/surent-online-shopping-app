@@ -38,6 +38,7 @@ const Cart = ({setCartData}) => {
         try {
             const response = await axios.get("http://localhost:8080/api/carts", config);
             setCart(response.data);
+            
             localStorage.setItem("cartId", response.data._id)
             setLoading(false);
             setCartData(response.data);

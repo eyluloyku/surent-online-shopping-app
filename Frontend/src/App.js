@@ -14,7 +14,7 @@ import Cart from "./components/cart/Cart";
 import Orders from "./components/pages/OrderListing";
 import Sort from "./components/pages/Sort";
 import Category from "./components/pages/Category";
-
+import Wishlist from "./components/pages/Wishlist";
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
           <Route path="/CheckoutPage" exact element={<Cart/>}></Route>
           <Route path="/sort/:id" element={<Sort/>} />
           <Route path="/category/:id" element={<Category/>} />
+          <Route path="/wishlist/:id" element={<Wishlist/>} />
         </Routes>
       </Router>
     </div>

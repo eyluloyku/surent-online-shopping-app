@@ -5,6 +5,7 @@ import "./Navbar.css";
 import {Button} from "./Button";
 
 import Cart from "./cart/Cart";
+import Wishlist from "./pages/Wishlist";
 /* this app uses font awesome and some free videos and pictures provided by pexels */
 
 function Navbar() {
@@ -88,6 +89,14 @@ function Navbar() {
                                 onClick={closeMobileMenu}
                              to={Cart}>
                                 <Cart/>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-links"
+                                onClick={closeMobileMenu}
+                             to={"/wishlist/"+userId}>
+                                Wl
                             </Link>
                         </li>
                         <li className="nav-item">

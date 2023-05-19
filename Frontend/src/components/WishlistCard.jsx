@@ -9,7 +9,7 @@ import {createTheme, ThemeProvider} from '@mui/material';
 import amber from "@mui/material/colors/amber"
 import axios from "axios";
 import {useState} from "react";
-import './product-card.css'
+import {useNavigate} from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -18,7 +18,7 @@ const theme = createTheme({
 });
 
 export default function MultiActionAreaCard({item}) {
-
+    const navigate = useNavigate();
     const [alertMessage, setAlertMessage] = useState("");
     const handleAddToCart = async () => {
 
@@ -36,29 +36,31 @@ export default function MultiActionAreaCard({item}) {
                 to cart successfully!</div>);
         } catch (error) {
             setAlertMessage(<div className="alert alert-danger alert-dismissible fade show" role="alert">Failed to add
-                product to cart.</div>);
+                product to cart</div>);
         }
     }
 
-    const handleAddToWishlist = async () => {
+    const removeItem = async (id) => {
+        let {userId, token} = localStorage;
+        const config = {
+            headers: {
+                'x-access-token': token,
+                'userId': userId
+            }
+        };
 
-        let {userId} = localStorage;
         try {
-            await axios.post('http://localhost:8080/api/addToWishlist', {
-                productId: item._id
-            }, {
-                headers: {
-                    userId: userId,
-                }
-            });
+            await axios.post(`http://localhost:8080/api/removeFromWishlist`, {
+                productId: id
+            }, config);
+            setAlertMessage(<div className="alert alert-success alert-dismissible fade show" role="alert">Product removed from wishlist!</div>);
+            navigate("/wishlist/"+userId);
+            window.location.reload()
 
-            setAlertMessage(<div className="alert alert-success alert-dismissible fade show" role="alert">Product added
-                to wishlist successfully!</div>);
         } catch (error) {
-            setAlertMessage(<div className="alert alert-danger alert-dismissible fade show" role="alert">Failed to add
-                product to wishlist.</div>);
+            setAlertMessage(<div className="alert alert-danger alert-dismissible fade show" role="alert">  $error</div>);
         }
-    }
+    };
 
     setTimeout(function () {
         setAlertMessage('');
@@ -93,7 +95,7 @@ export default function MultiActionAreaCard({item}) {
                         )
                 }
                 
-                        <Button variant="contained" onClick={handleAddToWishlist} >Wishlist</Button>  
+                        <Button variant="contained" onClick={() =>removeItem(item._id)} >Remove</Button>  
                 </CardActions>
             </Card>
         </ThemeProvider>

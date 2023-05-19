@@ -75,7 +75,6 @@ function Orders() {
                           <div className="product-info">
                           {prods.map((prod) => {
                             if (prod._id === item.product) {
-                              console.log(prod)
                               return <h4 key={prod.id} >{prod.Pname}</h4>;
                             }
                             return null;

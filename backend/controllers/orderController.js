@@ -31,7 +31,7 @@ const getOrders = async (req,res)=>{
         
         
         if (!userOrders.length) {
-            return res.status(404).json({ error: "No orders with matching id found." });
+            return res.status(200).json({ error: "No orders with matching id found." });
           }
       
           res.status(200).json(userOrders);
