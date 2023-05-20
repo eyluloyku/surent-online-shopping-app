@@ -15,6 +15,8 @@ import Orders from "./components/pages/OrderListing";
 import Sort from "./components/pages/Sort";
 import Category from "./components/pages/Category";
 import Wishlist from "./components/pages/Wishlist";
+import AdminLogin from "./components/AdminLogin";
+import ProdMan from "./components/ProdMan";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="/sort/:id" element={<Sort/>} />
           <Route path="/category/:id" element={<Category/>} />
           <Route path="/wishlist/:id" element={<Wishlist/>} />
+          <Route path="/AdminLogin" element={<AdminLogin/>} />
+          <Route path="/ProdMan" element={<ProdMan/>} />
         </Routes>
       </Router>
     </div>

@@ -31,6 +31,7 @@ function PaymentInfo({ formData, setFormData }) {
           value={formData.cardNum}
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
+          maxLength="16"
         />
         <input className="paymentFormInput"
           type='text'
@@ -47,6 +48,7 @@ function PaymentInfo({ formData, setFormData }) {
           value={formData.expiry}
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
+          maxLength="5"
         />
         <input className="paymentFormInput"
           type='tel'
@@ -55,6 +57,7 @@ function PaymentInfo({ formData, setFormData }) {
           value={formData.cvc}
           onChange={e => handleChange(e.target.name, e.target.value)}
           onFocus={e => setFocus(e.target.name)}
+          maxLength="3"
         />
       </form>
     </div>

@@ -96,7 +96,8 @@ function Navbar() {
                                 className="nav-links"
                                 onClick={closeMobileMenu}
                              to={"/wishlist/"+userId}>
-                                Wl
+                                <i class="fa-sharp fa-solid fa-heart">&nbsp;</i>
+                                Wishlist
                             </Link>
                         </li>
                         <li className="nav-item">

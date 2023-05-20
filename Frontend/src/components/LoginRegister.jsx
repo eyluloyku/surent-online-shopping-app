@@ -2,6 +2,7 @@ import "./login.css";
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {Button} from "./Button";
 
 function LoginRegister(props) {
     const [email, setEmail] = useState("");
@@ -138,10 +139,13 @@ function LoginRegister(props) {
                                                         />
                                                         <i className="input-icon uil uil-lock-alt"></i>
                                                     </div>
-                                                    <button
-                                                        onClick={handleLoginSubmit} className="btN mt-4"
-                                                    >Login
-                                                    </button>
+                                                    <div className="form-group mt-2">
+                                                        <button
+                                                            onClick={handleLoginSubmit} className="btN mt-4"
+                                                        >Login
+                                                        </button>
+                                                    </div>
+                                                    <Button destination="/AdminLogin" buttonStyle="btn--adjust">Admin</Button>
                                                     <p className="mb-0 mt-4 text-center">
                                                         <a href="https://www.google.com/" className="link"
                                                         >Forgot your password?</a
