@@ -65,24 +65,33 @@ const InvoicePDF = {
     const blob = await pdf(<InvoiceDocument data={data} cartItems={cartItems} />).toBlob();
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.target = '_blank'; // change download attribute to target="_blank"
+    link.target = '_blank';
     //link.download = `Invoice-${data.invoiceNumber}.pdf`;
     link.click();
-    const emailResponse = await axios.post('http://localhost:8080/api/orders/sendPDF', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ blob, userEmail: "e.oyku.sen@gmail.com" })
-    });
 
-    if (emailResponse.ok) {
-      console.log('Email sent successfully');
-    } else {
-      console.error('Error sending email: ', emailResponse.statusText);
-    }
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = async function () {
+      const pdfBase64 = reader.result.split(',')[1];
+      
+      const emailResponse = await axios.post('http://localhost:8080/api/orders/sendPDF', {
+        userEmail: "emir.asal@gmail.com",
+        pdfBase64: pdfBase64
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (emailResponse.ok) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Error sending email: ', emailResponse.statusText);
+      }
+    };
   },
 };
+
 
 const InvoiceDocument = ({ data, cartItems }) => (
   <Document>

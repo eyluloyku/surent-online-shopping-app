@@ -52,15 +52,18 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const sendEmailWithPDF = (pdfBlob, userEmail) => {
+const sendEmailWithPDF = async (req, res) => {
+
+  const {userEmail, pdfBase64} = req.body;
+
   const mailOptions = {
     from: 'ssurent2@gmail.com',
-    to: "emir.asal@gmail.com",
+    to: userEmail,
     subject: 'Invoice PDF',
     attachments: [
       {
         filename: 'Invoice.pdf',
-        content: pdfBlob,
+        content: Buffer.from(pdfBase64, 'base64'),
         contentType: 'application/pdf',
         disposition: 'inline'
       }
