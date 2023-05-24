@@ -17,6 +17,7 @@ import Category from "./components/pages/Category";
 import Wishlist from "./components/pages/Wishlist";
 import AdminLogin from "./components/AdminLogin";
 import ProdMan from "./components/ProdMan";
+import RevenueChart from "./components/pages/RevenueChart";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/wishlist/:id" element={<Wishlist/>} />
           <Route path="/AdminLogin" element={<AdminLogin/>} />
           <Route path="/ProdMan" element={<ProdMan/>} />
+          <Route path="/revenue/:date1/:date2" element={<RevenueChart/>} />
         </Routes>
       </Router>
     </div>

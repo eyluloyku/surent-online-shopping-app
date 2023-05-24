@@ -52,15 +52,20 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const sendEmailWithPDF = (pdfBlob, userEmail) => {
+const sendEmailWithPDF = async (req, res) => {
+
+  const {userEmail, pdfBase64} = req.body;
+
   const mailOptions = {
     from: 'ssurent2@gmail.com',
-    to: "e.oyku.sen@gmail.com",
+    to: userEmail,
     subject: 'Invoice PDF',
     attachments: [
       {
         filename: 'Invoice.pdf',
-        content: pdfBlob
+        content: Buffer.from(pdfBase64, 'base64'),
+        contentType: 'application/pdf',
+        disposition: 'inline'
       }
     ]
   };
@@ -74,4 +79,32 @@ const sendEmailWithPDF = (pdfBlob, userEmail) => {
   });
 };
 
-export {getOrders, sendEmailWithPDF}
+
+const getOrdersByDateRange = async (req,res)=>{
+  try {
+      const { date1, date2 } = req.params //gives us the id that we type. 
+      
+      const dateOrders = await Order.aggregate([
+          { $match : { dateOrdered: { $gte: new Date(date1), $lte: new Date(date2) } } },
+          { $project: {
+              status: 1,
+              totalPrice: 1,
+              dateOrdered: 1
+          }
+          }
+      ]
+      );
+      
+      
+      if (!dateOrders.length) {
+          return res.status(200).json({ error: "No orders found between given dates." });
+        } 
+    
+      res.status(200).json(dateOrders); 
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+export {getOrders, sendEmailWithPDF, getOrdersByDateRange}
