@@ -242,7 +242,57 @@ const sortByPopularityDescending = async (req, res) => {
   }
 };
 
+
+
+const getStock = async (req, res) => {
+  const { productId } = req.params; // Assuming you pass the product ID in the request parameters
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    const stock = product.stock;
+    res.json({ stock });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+const getAllRatings = async (req, res) => {
+  const { productId } = req.params; // Assuming you pass the product ID in the request parameters
+
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    const approvedRatings = product.reviews
+      .filter(review => review.approved)
+      .map(review => review.rating);
+
+    res.json({ ratings: approvedRatings });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
+
+
+
+
+
+
 export {
+  getAllRatings,
+    getStock,
     createProd,
     getAllProds,
     getProductById,

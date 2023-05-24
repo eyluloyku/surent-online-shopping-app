@@ -24,7 +24,7 @@ const orderSchema = new mongoose.Schema({
   items: [orderItemSchema],
   status: {
     type: String,
-    enum: ['processing', 'in-transit', 'delivered'],
+    enum: ['processing', 'in-transit', 'delivered','cancelled'],
     default: 'processing',
     required: true
   },
@@ -94,6 +94,26 @@ orderSchema.methods.updateStockNumbers = async function() {
     await product.save();
   }
 };
+
+orderSchema.methods.refundOrder = async function() {
+  if (this.status !== 'processing') {
+    throw new Error('Refund can only be processed for orders with "processing" status.');
+  }
+
+  // Update order status to "delivered" and save the changes
+  this.status = 'cancelled';
+  await this.save();
+
+  // Refund the order by adding the items' quantity back to the product stock
+  for (let item of this.items) {
+    const product = await Product.findById(item.product);
+    product.stock += item.quantity;
+    await product.save();
+  }
+
+  return this;
+};
+
 
 const Order = mongoose.model("Order", orderSchema);
 const OrderItem = mongoose.model("OrderItem", orderItemSchema);

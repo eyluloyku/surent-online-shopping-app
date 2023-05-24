@@ -14,15 +14,18 @@ import {
     getProductReviews,
     sortByPriceDescending,
     sortByRatingDescending,
-    sortByPopularityDescending
+    sortByPopularityDescending,
+    getStock,
+    getAllRatings
 } from "../controllers/productController.js"
 
 const router = Router();
 
 router.get('/getAll', getAllProds)
 router.post('/add',createProd);
-
-router.get('/prodID/:id',getProductById)
+router.post('/getStock:id',getStock);
+router.get('/getAll:id', getAllProds)
+router.get('/getAllRatings/:id',getAllRatings)
 
 router.get('/prodName/:name',getProductByName)
 
