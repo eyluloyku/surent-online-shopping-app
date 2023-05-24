@@ -28,6 +28,7 @@
   font-size: 2rem;
   display: flex;
   align-items: center;
+  margin-right: 10rem;
 }
 
 .navbar-logo:hover{
@@ -41,18 +42,17 @@
 }
 
 .nav-menu {
-  display: grid;
-  grid-template-columns: repeat(6, auto);
-  grid-gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   list-style: none;
   text-align: center;
-  width: 60vw;
-  justify-content: end;
+  width: 1000%; /* Percentage value */
   margin-right: 2rem;
 }
 
 .nav-item {
-  height: 80px;
+  flex: 1;
 }
 
 .nav-links {
@@ -83,7 +83,6 @@
 .menu-icon {
   display: none;
 }
-
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;

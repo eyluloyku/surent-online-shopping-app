@@ -74,7 +74,7 @@ function Form({cartData}) {
                 data.push(item);
                 });
 
-                InvoicePDF.generateInvoice(formData, cartData.products);
+                InvoicePDF.generateInvoice(formData, cartData.products,formData.email);
                 axios.post("http://localhost:8080/api/orders/", {
                   items: data,
                   status: "processing",

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 
 const InvoicePDF = {
-  async generateInvoice(data, cartItems) {
+  async generateInvoice(data, cartItems, email) {
     const blob = await pdf(<InvoiceDocument data={data} cartItems={cartItems} />).toBlob();
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -75,7 +75,7 @@ const InvoicePDF = {
       const pdfBase64 = reader.result.split(',')[1];
       
       const emailResponse = await axios.post('http://localhost:8080/api/orders/sendPDF', {
-        userEmail: "emir.asal@gmail.com",
+        userEmail: email,
         pdfBase64: pdfBase64
       }, {
         headers: {

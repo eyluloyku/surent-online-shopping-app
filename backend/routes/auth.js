@@ -75,4 +75,50 @@ router.post("/logIn", cors(), async (req, res) => {
 	}
 });
 
+//for checking admin login - does not work for now.
+router.post("/logInAdmin", cors(), async (req, res) => {
+    try {
+        const {error} = logInBodyValidation(req.body);
+        if (error)
+            return res
+                .status(400)
+                .json({error: true, message: error.details[0].message});
+
+        const user = await User.findOne({email: req.body.email});
+        if (!user)
+            return res
+                .status(401)
+                .json({error: true, message: "Invalid email or password"});
+
+        const verifiedPassword = await bcrypt.compare(
+            req.body.password,
+            user.password
+        );
+        if (!verifiedPassword)
+            return res
+                .status(401)
+                .json({error: true, message: "Invalid email or password"});
+
+        // Check if user has 'prod_man' or 'sales_man' role
+        if (!user.roles.includes('prod_man') && !user.roles.includes('sales_man')) 
+            return res
+                .status(403)
+                .json({error: true, message: "You are not admin"});
+
+        const {accessToken, refreshToken} = await generateTokens(user);
+        res.status(200).json({
+            error: false,
+            accessToken,
+            refreshToken,
+            userId: user.id,
+            refreshToken,
+            message: "Logged in successfully",
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({error: true, message: "Internal Server Error"});
+    }
+});
+
+
 export default router;

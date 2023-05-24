@@ -14,6 +14,7 @@ function Navbar() {
     const [accessToken, setAccessToken] = useState(true);
     const navigate = useNavigate();
     const [userId, setUserId] = useState("");
+    const [isAdmin, setIsAdmin] = useState(true);
     
     const handleClick = () => {
         setClick(!click); /* reverse the value whenever you click it*/
@@ -29,6 +30,7 @@ function Navbar() {
         localStorage.removeItem("token")
         localStorage.removeItem("userId")
         localStorage.removeItem("isCustomer")
+        localStorage.removeItem("isAdmin")
         window.location.reload()
     };
 
@@ -51,6 +53,10 @@ function Navbar() {
         setUserId(localStorage.getItem('userId'));
     });
 
+    useEffect(() => {
+        setIsAdmin(localStorage.getItem("isAdmin") === 'true'); // Set isAdmin state
+    }, [accessToken]);
+
     window.addEventListener(
         "resize",
         showButton
@@ -67,8 +73,6 @@ function Navbar() {
                         <i className={click ? "fas fa-times" : "fas fa-bars"}/>
                     </div>
                     <ul className={click ? "nav-menu active" : "nav-menu"}>
-                        {" "}
-                        {/*make nav menu dissapear */}
                         <li className="nav-item">
                             <Link to="/" className="nav-links" onClick={closeMobileMenu}>
                                 Home
@@ -101,12 +105,10 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-
                             {accessToken ?
                                 <Link className="nav-links-mobile" onClick={logout}>Logout</Link> :
                                 <Link to="/login" className="nav-links-mobile" onClick={closeMobileMenu}> Get
                                     Started </Link>}
-
                         </li>
                         {accessToken? (
                         <li className="nav-item">
@@ -122,17 +124,24 @@ function Navbar() {
                     </ul>
                     {button ? (
                         accessToken ? (
-                            <Button onClick={logout} buttonStyle="btn--outline">
-                            Logout
-                            </Button>
+                            <>
+                                <Button onClick={logout} buttonStyle="btn--outline">
+                                    Logout
+                                </Button>
+                                {isAdmin && (
+                                    <Button destination="/ProdMan" buttonStyle="btn--outline">
+                                        admin
+                                    </Button>
+                                )}
+                            </>
                         ) : (
                             <Button destination="/login" buttonStyle="btn--outline">
-                            Get Started
+                            Explore
                             </Button>
                         )
-                        ) : (
+                    ) : (
                         ""
-                        )}
+                    )}
                 </div>
             </nav>
         </>

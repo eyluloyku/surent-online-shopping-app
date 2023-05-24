@@ -9,9 +9,14 @@ router.get("/details", auth, (req, res) => {
 });
 
 /*
-router.get("/details", auth, roleCheck(["sales_man"]), (req, res) => {
+router.get("/getsalesMan", auth, roleCheck(["sales_man"]), (req, res) => {
+	res.status(200).json({ message: "user authenticated." });
+});
+
+router.get("/getprodMan", auth, roleCheck(["prod_man"]), (req, res) => {
 	res.status(200).json({ message: "user authenticated." });
 });
 */
+
 
 export default router;

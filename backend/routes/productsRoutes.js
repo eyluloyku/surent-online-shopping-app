@@ -20,7 +20,7 @@ import {
 } from "../controllers/productController.js"
 
 const router = Router();
-
+router.get('/prodID/:id',getProductById)
 router.get('/getAll', getAllProds)
 router.post('/add',createProd);
 router.post('/getStock:id',getStock);
