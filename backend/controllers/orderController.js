@@ -107,4 +107,11 @@ const getOrdersByDateRange = async (req,res)=>{
   }
 }
 
-export {getOrders, sendEmailWithPDF, getOrdersByDateRange}
+//get all orders
+const getAllOrders = async(req,res)=>{
+  const orders = await Order.find({}).sort({dateOrdered:-1}) //leave blank since we want all.
+
+  res.status(200).json(orders)
+}
+
+export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders}

@@ -4,14 +4,14 @@ import {Button, Modal} from "react-bootstrap";
 import axios from "axios";
 import WishlistCard from "../WishlistCard";
 
-function Wishlist  ({}) {
+const Wishlist = ({setWishlistData}) => {
     const [wishlist, setWishlist] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [prods, setProds] = useState([]);
+    
 
-  
-    useEffect(() => {
+    const fetchWL = async () => {
         setLoading(true);
 
         let {userId, token} = localStorage;
@@ -37,12 +37,11 @@ function Wishlist  ({}) {
                 localStorage.setItem("wishlistId", response.data._id)
                 setLoading(false)
                 //setWishlistData(response.data)
-                let prods2 = []
                 response.data.products.forEach(product => {
                     axios.get('http://localhost:8080/api/products/prodID/'+product.productId).then(res=>{
-                        //prods2.push(res.data)
-                        //prods.push(res.data)
-                        setProds([...prods, res.data])
+                        
+                        prods.push(res.data)
+                        
                     }).catch(error=>{
                         console.log(error,);
                     });
@@ -53,7 +52,22 @@ function Wishlist  ({}) {
             setLoading(false);
         }
         
+    };
+
+    useEffect(() => {
+        fetchWL();
+       
     }, []);
+    
+    /*useEffect(() => {
+        wishlist.products.forEach(product => {
+            axios.get('http://localhost:8080/api/products/prodID/'+product.productId).then(response=>{
+                data.push(response);
+              }).catch(error=>{
+                console.log(error,);
+              });
+        });
+    }); */
 
     
 
@@ -66,7 +80,7 @@ function Wishlist  ({}) {
         <div>
             <div className="container">
                 <ul className='columnList'>
-                     
+                    
                   {prods.length > 0 ? (prods.map(item=>(
                     <li key={item._id}><WishlistCard item={item} ></WishlistCard></li>
                   ))): 

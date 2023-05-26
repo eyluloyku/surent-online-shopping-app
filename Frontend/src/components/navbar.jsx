@@ -99,7 +99,7 @@ function Navbar() {
                             <Link
                                 className="nav-links"
                                 onClick={closeMobileMenu}
-                             to={"/wishlist/"+userId}>
+                                to= {"/wishlist/"+userId}>
                                 <i class="fa-sharp fa-solid fa-heart">&nbsp;</i>
                                 Wishlist
                             </Link>

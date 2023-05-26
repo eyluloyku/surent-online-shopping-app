@@ -90,6 +90,15 @@ const InvoicePDF = {
       }
     };
   },
+  async generateInvoiceForSM(data, cartItems, prods) {
+    
+    const blob = await pdf(<InvoiceDocument2 data={data} cartItems={cartItems} prods={prods} />).toBlob();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.target = '_blank';
+    //link.download = `Invoice-${data.invoiceNumber}.pdf`;
+    link.click();
+  },
 };
 
 
@@ -163,6 +172,84 @@ const InvoiceDocument = ({ data, cartItems }) => (
 );
 
 
+
+
+const InvoiceDocument2 = ({ data, cartItems,prods }) => (
+ 
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.coloredBar}></View>
+      <Text style={styles.header}>Invoice</Text>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>
+          {'\u{1F4CA}'} Company Information
+        </Text>
+        <Text style={styles.label}>Name:</Text>
+        <Text style={styles.value}>SUrent</Text>
+        <Text style={styles.label}>Phone:</Text>
+        <Text style={styles.value}>+90 123 456 7890</Text>
+        <Text style={styles.label}>Address:</Text>
+        <Text style={styles.value}>Tuzla Istanbul Sabanci Univ</Text>
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Client Information</Text>
+        <View style={styles.row}>
+          <Text style={styles.label}>Client Name:</Text>
+          <Text style={styles.value}>{data.fullName}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.value}>{data.email}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Country:</Text>
+          <Text style={styles.value}>{data.country}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Adress:</Text>
+          <Text style={styles.value}>{data.addressLine1} {data.addressLine2} {data.state} / {data.city}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Zipcode:</Text>
+          <Text style={styles.value}>{data.postalCode}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Telephone:</Text>
+          <Text style={styles.value}>{data.phoneNumber}</Text>
+        </View>
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Billing Information</Text>
+        {/* Add billing information rows here */}
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Items</Text>
+        <View style={styles.tableHeader}>
+          <Text style={[styles.tableColumn, styles.label]}>Item</Text>
+          <Text style={[styles.tableColumn, styles.label]}>Quantity</Text>
+          <Text style={[styles.tableColumn, styles.label]}>Price</Text>
+        </View>
+        {cartItems.map((item, index) => (
+          <View key={item._id} style={styles.tableRow}>
+            {prods.map((prod) => {
+              console.log(prod.Pname)
+              if (prod._id === item.product) {
+                return <Text style={[styles.tableColumn, styles.value]}>{prod.Pname}</Text>
+              }
+                return null;
+            })}
+            <Text style={[styles.tableColumn, styles.value]}>{item.quantity}</Text>
+            <Text style={[styles.tableColumn, styles.value]}>${item.price.toFixed(2)}</Text>
+
+        </View>
+        ))}
+      </View>
+      <Text style={styles.totalPrice}>
+        Total Price: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
+      </Text>
+    </Page>
+  </Document>
+);
 
 export default InvoicePDF;
 

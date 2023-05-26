@@ -18,6 +18,7 @@ import Wishlist from "./components/pages/Wishlist";
 import AdminLogin from "./components/AdminLogin";
 import ProdMan from "./components/ProdMan";
 import RevenueChart from "./components/pages/RevenueChart";
+import InvoicesForSM from "./components/pages/InvoicesForSM";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/AdminLogin" element={<AdminLogin/>} />
           <Route path="/ProdMan" element={<ProdMan/>} />
           <Route path="/revenue/:date1/:date2" element={<RevenueChart/>} />
+          <Route path="/InvoicesSM" element={<InvoicesForSM/>} />
         </Routes>
       </Router>
     </div>
