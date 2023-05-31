@@ -62,6 +62,13 @@ function Navbar() {
         showButton
     ); 
 
+
+    const toggleProfile = () => {
+        let subMenu = document.getElementById("subMenu");
+        subMenu.classList.toggle("open-products");
+        setClick(false);
+      };
+
     return (
         <>
             <nav className="navbar">
@@ -95,42 +102,57 @@ function Navbar() {
                                 <Cart/>
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                                to= {"/wishlist/"+userId}>
-                                <i class="fa-sharp fa-solid fa-heart">&nbsp;</i>
-                                Wishlist
-                            </Link>
-                        </li>
+                        
                         <li className="nav-item">
                             {accessToken ?
                                 <Link className="nav-links-mobile" onClick={logout}>Logout</Link> :
                                 <Link to="/login" className="nav-links-mobile" onClick={closeMobileMenu}> Get
                                     Started </Link>}
                         </li>
-                        {accessToken? (
-                        <li className="nav-item">
-                            <Link
-                                to= {"/GetOrders/"+userId}
-                                className="nav-links"
-                                onClick={closeMobileMenu}
-                            >
-                                Orders
-                            </Link>
-                        </li>
-                        ):<></>}
+                        
                     </ul>
                     {button ? (
                         accessToken ? (
                             <>
-                                <Button onClick={logout} buttonStyle="btn--outline">
-                                    Logout
-                                </Button>
+
+                            <div class="sub-menu-wrap" id="subMenu">
+                                <div class="sub-menu">
+                                <Link class="sub-products-link" to= {"/wishlist/"+userId}>
+                                <i class="fa-sharp fa-solid fa-heart">&nbsp;</i>
+                                    <h5>My Wishlist</h5>
+                                </Link>
+                                <hr></hr>
+
+                                <Link class="sub-products-link" to= {"/GetOrders/"+userId} >
+                                <i class="fas fa-envelope"></i>
+                                    <h5>My orders</h5>
+                                </Link>
+                                <hr></hr>
+
+                                <Link class="sub-products-link" onClick={logout}>
+                                <i class="fas fa-times"></i>
+                                    <h5>Logout</h5>
+                                </Link>
+                                <hr></hr>
+
+
+                                </div>
+                            </div>
+
+
+                            <Button onClick={toggleProfile} buttonStyle="btn--outline">
+                                <div class="profile-iconandtext">
+                                    <i class="fas fa-user"></i>
+                                    <h5>Profile</h5>
+                                </div>
+
+                            </Button>
+
+
+
                                 {isAdmin && (
                                     <Button destination="/ProdMan" buttonStyle="btn--outline">
-                                        admin
+                                        Admin
                                     </Button>
                                 )}
                             </>
