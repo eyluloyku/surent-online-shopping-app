@@ -37,16 +37,17 @@ function Wishlist  ({}) {
                 localStorage.setItem("wishlistId", response.data._id)
                 setLoading(false)
                 //setWishlistData(response.data)
-                let prods2 = []
-                response.data.products.forEach(product => {
-                    axios.get('http://localhost:8080/api/products/prodID/'+product.productId).then(res=>{
-                        //prods2.push(res.data)
-                        //prods.push(res.data)
-                        setProds([...prods, res.data])
-                    }).catch(error=>{
-                        console.log(error,);
-                    });
-                })
+                const productRequests = response.data.products.map((product) =>
+                axios
+                  .get("http://localhost:8080/api/products/prodID/" + product.productId)
+                  .then((res) => res.data)
+                  .catch((error) => console.log(error))
+              );
+      
+              Promise.all(productRequests).then((products) => {
+                setProds(products);
+              });
+                console.log(prods.length)
                 }
                 )
         } catch (error) {

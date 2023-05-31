@@ -3,6 +3,7 @@ import User from '../models/User.js'
 import Product from '../models/productmodel.js';
 import nodemailer from 'nodemailer';
 import fs from 'fs'
+import mongoose from "mongoose"
 
 //get all orders of user
 const getOrders = async (req,res)=>{
@@ -114,4 +115,19 @@ const getAllOrders = async(req,res)=>{
   res.status(200).json(orders)
 }
 
-export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders}
+
+//delete product
+const deleteOrder = async(req,res) =>{
+  const {id} = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such order"})
+  }
+
+  const order = await Order.findOneAndDelete({_id: id})
+  if(!order){
+    return res.status(404).json({error:"No corresponding order with given id."})
+  }
+  res.status(200).json(order);
+}
+export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder}

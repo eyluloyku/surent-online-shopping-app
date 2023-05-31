@@ -1,7 +1,7 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import Order from '../models/Order.js';
-import {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders} from '../controllers/orderController.js'
+import {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder} from '../controllers/orderController.js'
 import Product from '../models/productmodel.js';
 const orderRouter = express.Router();
 
@@ -36,5 +36,6 @@ orderRouter.get('/getOrders/:id', getOrders);
 orderRouter.post('/sendPDF', sendEmailWithPDF);
 orderRouter.get('/getOrdersByDateRange/:date1/:date2', getOrdersByDateRange);
 orderRouter.get('/getOrders', getAllOrders);
+orderRouter.post('/deleteOrder/:id', deleteOrder);
 
 export {orderRouter};

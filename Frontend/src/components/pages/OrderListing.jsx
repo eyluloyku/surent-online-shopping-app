@@ -33,6 +33,11 @@ function Orders() {
       window.location.reload()
   };
 
+  const handleCancelOrder = async(id) => {
+    axios.post("http://localhost:8080/api/orders/deleteOrder/"+id);
+    window.location.reload();
+  }
+
   return (
       <Container>
         <Main>
@@ -59,7 +64,24 @@ function Orders() {
                       Status: <span>{order.status}</span>
                     </p>
                     <p>
-                      Subtotal: $<span>{order.totalPrice}</span>
+                      Total: $<span>{order.totalPrice}</span>
+                    </p>
+                    {order.status === 'processing' ? (
+                          <button  onClick={() => handleCancelOrder(order._id)} style={{ 
+                            backgroundColor: '#4CAF50',
+                            border: 'none',
+                            color: 'white',
+                            padding: '10px 24px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            margin: '10px 0 0 10px',
+                            verticalAlign: 'middle'
+                          }}>Cancel Order</button>
+                        ): (<></>)}
+                        <p>
+                      
                     </p>
                     {order.items.map((item) => (
                       <Product key={item.id}>
@@ -97,6 +119,7 @@ function Orders() {
                             verticalAlign: 'middle'
                           }}>Review</button>
                         ): (<></>)}
+                          
                           </div>
                         </Description>
                       </Product>
