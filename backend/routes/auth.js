@@ -75,7 +75,7 @@ router.post("/logIn", cors(), async (req, res) => {
 	}
 });
 
-//for checking admin login - does not work for now.
+//for checking admin login 
 router.post("/logInAdmin", cors(), async (req, res) => {
     try {
         const {error} = logInBodyValidation(req.body);

@@ -15,6 +15,8 @@ function Navbar() {
     const navigate = useNavigate();
     const [userId, setUserId] = useState("");
     const [isAdmin, setIsAdmin] = useState(true);
+    const [showAdminMenu, setShowAdminMenu] = useState(false);
+
     
     const handleClick = () => {
         setClick(!click); /* reverse the value whenever you click it*/
@@ -69,6 +71,14 @@ function Navbar() {
         setClick(false);
       };
 
+    const toggleAdminMenu = () => {
+        let adminSubMenu = document.getElementById("adminSubMenu");
+        if(adminSubMenu){
+            adminSubMenu.classList.toggle("open-admin");
+        }
+    };
+    
+    
     return (
         <>
             <nav className="navbar">
@@ -150,10 +160,32 @@ function Navbar() {
 
 
 
-                                {isAdmin && (
-                                    <Button destination="/ProdMan" buttonStyle="btn--outline">
-                                        Admin
-                                    </Button>
+                            {isAdmin && (
+                                    <>
+                                        <div className="dropdown">
+                                            <Button onClick={toggleAdminMenu} buttonStyle="btn--outline">
+                                                <div className="profile-iconandtext">
+                                                <i className="fas fa-user-shield"></i>
+                                                <h5>Admin</h5>
+                                                </div>
+                                            </Button>
+                                                <div className="sub-menu-wrap" id="adminSubMenu">
+                                                    <div className="sub-menu">
+                                                    <Link className="sub-products-link" to="/prodMan">
+                                                        <i className="fas fa-tools"></i>
+                                                        <h5>Prod_Man</h5>
+                                                    </Link>
+                                                    <hr></hr>
+
+                                                    <Link className="sub-products-link" to="/salesMan">
+                                                        <i className="fas fa-chart-line"></i>
+                                                        <h5>Sales_Man</h5>
+                                                    </Link>
+                                                    <hr></hr>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </>
                                 )}
                             </>
                         ) : (

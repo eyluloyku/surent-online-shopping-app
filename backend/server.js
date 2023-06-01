@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import dbConnect from "./dbConnect.js";
 import authRoutes from "./routes/auth.js";
 import refreshTokenRoutes from "./routes/refreshToken.js";
-import userRoutes from "./routes/users.js";
+import userRoutes from "./routes/users.js"; //usersRoleCheck
 import {router} from "./routes/productsRoutes.js";
 import cartRoutes from "./routes/cart.js";
 import {orderRouter} from "./routes/orderRouter.js";

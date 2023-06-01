@@ -221,3 +221,6 @@
 .profile-iconandtext i {
   margin-right: 5px;
 }
+.sub-menu-wrap.open-admin{
+  max-height: 380px;
+}

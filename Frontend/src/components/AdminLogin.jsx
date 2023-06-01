@@ -23,7 +23,7 @@ function AdminLogin() {
                 localStorage.setItem('userId', response.data.userId);
                 localStorage.setItem("isAdmin",true);
                 console.log("User is admin");
-                navigate('/ProdMan');
+                navigate('/');
                 window.location.reload()
             } else {
                 console.log("User is not admin");

@@ -19,6 +19,10 @@ import AdminLogin from "./components/AdminLogin";
 import ProdMan from "./components/ProdMan";
 import RevenueChart from "./components/pages/RevenueChart";
 import InvoicesForSM from "./components/pages/InvoicesForSM";
+import ManageProducts from "./components/ManageProducts";
+import ManageCategories from "./components/ManageCategories";
+import DetermineStocks from "./components/DetermineStocks"
+import OrderDetails from "./components/OrderDetails";
 
 function App() {
   return (
@@ -42,9 +46,14 @@ function App() {
           <Route path="/category/:id" element={<Category/>} />
           <Route path="/wishlist/:id" element={<Wishlist/>} />
           <Route path="/AdminLogin" element={<AdminLogin/>} />
-          <Route path="/ProdMan" element={<ProdMan/>} />
+          <Route path="/prodMan" element={<ProdMan/>} />
+          <Route path="/salesMan" element={<salesMan/>} />
           <Route path="/revenue/:date1/:date2" element={<RevenueChart/>} />
           <Route path="/InvoicesSM" element={<InvoicesForSM/>} />
+          <Route path="/ManageProds" element={<ManageProducts/>}></Route>
+          <Route path="/ManageCategories" element={<ManageCategories/>}></Route>
+          <Route path="/Determinestocks" element={<DetermineStocks/>}></Route>
+          <Route path="/Orderdetails" element={<OrderDetails/>}></Route>
         </Routes>
       </Router>
     </div>
