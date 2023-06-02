@@ -64,6 +64,11 @@ export default function MultiActionAreaCard({item}) {
         setAlertMessage('');
     }, 5000);
 
+    const price = parseFloat(item.price);
+    const Discount_rate = parseFloat(item.Discount_rate);
+
+    const calculatedPrice = (price * (1 - Discount_rate / 100)).toFixed(2);
+
     return (
 
         <ThemeProvider theme={theme}>
@@ -81,7 +86,7 @@ export default function MultiActionAreaCard({item}) {
                             {item.Pname}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            ${item.price}
+                            ${calculatedPrice}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

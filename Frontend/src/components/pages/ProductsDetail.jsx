@@ -69,6 +69,11 @@ export default function ProductsDetail() {
         setAlertMessage('');
     }, 5000);
 
+    const price = parseFloat(product.price);
+    const Discount_rate = parseFloat(product.Discount_rate);
+
+    const calculatedPrice = (price * (1 - Discount_rate / 100)).toFixed(2);
+
     //HAS INTERNAL CSS, COME BACK!!!
     return(
         <div className="product-details">
@@ -122,7 +127,7 @@ export default function ProductsDetail() {
                     <Box p={2} height={"75px"}> 
                         <Grid container>
                             <Grid item p={1}>
-                                <Typography variant="h4" color={'#242424'}>${product.price}</Typography>
+                                <Typography variant="h4" color={'#242424'}>${calculatedPrice}</Typography>
                             </Grid>
                             <Grid item p={1}>
                                 <Typography variant="h6" color={"primary.light"}>%{product.Discount_rate} off!</Typography>
