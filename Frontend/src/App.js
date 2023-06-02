@@ -23,6 +23,8 @@ import ManageProducts from "./components/ManageProducts";
 import ManageCategories from "./components/ManageCategories";
 import DetermineStocks from "./components/DetermineStocks"
 import OrderDetails from "./components/OrderDetails";
+import PriceSetListing from "./components/pages/PriceSetListing2";
+import SetDiscount from "./components/pages/SetDiscount";
 
 function App() {
   return (
@@ -54,6 +56,8 @@ function App() {
           <Route path="/ManageCategories" element={<ManageCategories/>}></Route>
           <Route path="/Determinestocks" element={<DetermineStocks/>}></Route>
           <Route path="/Orderdetails" element={<OrderDetails/>}></Route>
+          <Route path="/SetPrice" element={<PriceSetListing/>} />
+          <Route path="/SetDiscount" element={<SetDiscount/>} />
         </Routes>
       </Router>
     </div>

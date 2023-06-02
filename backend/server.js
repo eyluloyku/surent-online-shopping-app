@@ -7,7 +7,8 @@ import userRoutes from "./routes/users.js"; //usersRoleCheck
 import {router} from "./routes/productsRoutes.js";
 import cartRoutes from "./routes/cart.js";
 import {orderRouter} from "./routes/orderRouter.js";
-import wishlistRoutes from "./routes/wishlist.js"
+import wishlistRoutes from "./routes/wishlist.js";
+import { notifyRouter } from "./routes/notify.js";
 import cors from 'cors';
 const app = express();
 
@@ -28,6 +29,8 @@ app.use("/api/products", router);
 app.use("/api", cartRoutes);
 app.use("/api/orders", orderRouter);
 app.use("/api", wishlistRoutes);
+app.use("/api/notify", notifyRouter);
+
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
