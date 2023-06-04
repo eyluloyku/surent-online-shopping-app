@@ -1,5 +1,6 @@
 import Order from '../models/Order.js'
 import User from '../models/User.js'
+import Refund from '../models/RefundReq.js';
 import Product from '../models/productmodel.js';
 import nodemailer from 'nodemailer';
 import fs from 'fs'
@@ -95,8 +96,6 @@ const getOrdersByDateRange = async (req,res)=>{
           }
       ]
       );
-      
-      
       if (!dateOrders.length) {
           return res.status(200).json({ error: "No orders found between given dates." });
         } 
@@ -130,4 +129,68 @@ const deleteOrder = async(req,res) =>{
   }
   res.status(200).json(order);
 }
-export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder}
+
+const refundProdsFromOrder = async (req, res) => {
+  const {refundId} = req.body; // Assuming the array of products is provided in the request body
+  const refund = await Refund.findById(refundId);
+  try {
+      // Find the product by its ID
+      const prodd = await Product.findById(refund.prod.product);
+      // Add the refunded quantity back to the product stock
+      prodd.stock = prodd.stock + Number(refund.prod.quantity)+1;
+      
+      // Save the updated product
+      await prodd.save();
+      
+      refund.prod.status = 'returned'
+
+      const orderr = await Order.findById(refund.order);
+      orderr.items.forEach(element => {
+        if (String(element.product)==String(refund.prod.product)) {
+          element.status = 'returned';
+
+        }
+      });
+      await orderr.save();
+      await refund.save();
+      // Return a success response
+    res.json({ message: 'Products refunded successfully' });
+    }
+  catch (error) {
+    // Handle any errors that occur during the refund process
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const createRefund = async (req, res) => {
+  const {
+    order,
+    prod,
+  } = req.body;
+  const refund = new Refund({
+    order,
+    prod,
+  });
+  const orderr = await Order.findById(order);
+  const product = await Product.findById(prod.product);
+  product.stock +=1;
+  await product.save()
+  orderr.items.forEach(element => {
+    if (element.product==prod.product) {
+      element.status = 'pending';
+    }
+  });
+  await orderr.save();
+  const createdRefund = await refund.save();
+  res.status(201).json(createdRefund);
+
+}
+
+//get all refunds
+const getAllRefunds= async(req,res)=>{
+  const refunds = await Refund.find({}) //leave blank since we want all.
+  res.status(200).json(refunds)
+}
+
+export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder, refundProdsFromOrder, createRefund, getAllRefunds}

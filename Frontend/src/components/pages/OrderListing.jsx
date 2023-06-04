@@ -32,11 +32,29 @@ function Orders() {
       navigate("/ReviewSubmit/"+id);
       window.location.reload()
   };
+  
+  const handleReturnProd = async(order, prod) => {
+    const b = {order: order, 
+      prod: {
+        product: prod.product,
+        quantity: prod.quantity,
+        price: prod.price
+      }}
+    axios.post("http://localhost:8080/api/orders/createRefund", b);
+    window.location.reload();
+  }
 
   const handleCancelOrder = async(id) => {
     axios.post("http://localhost:8080/api/orders/deleteOrder/"+id);
     window.location.reload();
   }
+
+  const isWithin30Days = (orderDate) => {
+    const currentDate = new Date(Date.now())
+    const differenceInTime = currentDate.getTime() - new Date(orderDate).getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    return differenceInDays <= 30;
+  };
 
   return (
       <Container>
@@ -44,7 +62,10 @@ function Orders() {
           <OrderContainer>
             <h2>Your Orders</h2>
             {orders.length > 0 ? (
-              orders.map((order) => ( 
+              orders.map((order) => 
+                
+                ( 
+                
                 <OrderDetail key={order.id}>
                   <AddressComponent>
                     <h4>Shipping Address</h4>
@@ -118,8 +139,50 @@ function Orders() {
                             margin: '10px 0 0 10px',
                             verticalAlign: 'middle'
                           }}>Review</button>
-                        ): (<></>)}
+                        ): (null)}
                           
+                          {item.status === 'delivered' && order.status === 'delivered' && isWithin30Days(order.dateOrdered)? (
+                          <button  onClick={() => handleReturnProd(order._id, item)} style={{ 
+                            backgroundColor: '#4CAF50',
+                            border: 'none',
+                            color: 'white',
+                            padding: '10px 24px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            margin: '10px 0 0 10px',
+                            verticalAlign: 'middle'
+                          }}>Return</button>
+                        ): (null)}
+                          {item.status === 'pending' ? (
+                          <button disabled style={{ 
+                            backgroundColor: 'gray',
+                            border: 'none',
+                            color: 'white',
+                            padding: '10px 24px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            margin: '10px 0 0 10px',
+                            verticalAlign: 'middle'
+                          }}>Return Pending</button>
+                        ): (<></>)}
+                          {item.status === 'returned' ? (
+                          <button disabled style={{ 
+                            backgroundColor: 'red',
+                            border: 'none',
+                            color: 'white',
+                            padding: '10px 24px',
+                            textAlign: 'center',
+                            textDecoration: 'none',
+                            display: 'inline-block',
+                            fontSize: '16px',
+                            margin: '10px 0 0 10px',
+                            verticalAlign: 'middle'
+                          }}>Returned</button>
+                        ): (<></>)}
                           </div>
                         </Description>
                       </Product>

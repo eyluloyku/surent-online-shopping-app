@@ -25,6 +25,7 @@ import DetermineStocks from "./components/DetermineStocks"
 import OrderDetails from "./components/OrderDetails";
 import PriceSetListing from "./components/pages/PriceSetListing2";
 import SetDiscount from "./components/pages/SetDiscount";
+import RefundReqsSM from "./components/pages/RefundRequestsSM";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/salesMan" element={<salesMan/>} />
           <Route path="/revenue/:date1/:date2" element={<RevenueChart/>} />
           <Route path="/InvoicesSM" element={<InvoicesForSM/>} />
+          <Route path="/RefundReqSM" element={<RefundReqsSM/>} />
           <Route path="/ManageProds" element={<ManageProducts/>}></Route>
           <Route path="/ManageCategories" element={<ManageCategories/>}></Route>
           <Route path="/Determinestocks" element={<DetermineStocks/>}></Route>
