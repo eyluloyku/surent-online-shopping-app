@@ -1,6 +1,6 @@
 import { Paper } from '@mui/material';
 
-//DESIGNED FOR RANDOM IMAGES
+//DESIGNED FOR RANDOM IMAGES(img)
 function Item({item})
 {
     return (

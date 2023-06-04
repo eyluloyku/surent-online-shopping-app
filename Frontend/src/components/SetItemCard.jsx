@@ -28,7 +28,7 @@ export default function MultiActionAreaCard({item}) {
       };
 
     const handleSubmit = () => {
-    // Make API request using Axios
+    // Make API request using axios
 
         try {
 

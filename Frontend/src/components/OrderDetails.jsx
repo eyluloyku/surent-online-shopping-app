@@ -46,7 +46,7 @@ function OrderList() {
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
   const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
 
-  // Change page
+  // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (

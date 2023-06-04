@@ -17,7 +17,7 @@ function AdminLogin() {
             const response = await axios.post('http://localhost:8080/api/logInAdmin', { email, password });
             const data = response.data;
             
-            // I'm assuming that your API returns a message telling whether the user is a 'prod_man' or not.
+            // I am assuming that your API returns a message telling whether the user is a 'prod_man' or not.
             if(data.message === 'Logged in successfully') {
                 localStorage.setItem('token', response.data.accessToken);
                 localStorage.setItem('userId', response.data.userId);
