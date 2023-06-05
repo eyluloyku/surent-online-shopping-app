@@ -26,6 +26,7 @@ import OrderDetails from "./components/OrderDetails";
 import PriceSetListing from "./components/pages/PriceSetListing2";
 import SetDiscount from "./components/pages/SetDiscount";
 import RefundReqsSM from "./components/pages/RefundRequestsSM";
+import salesMan from "./components/salesMan";
 
 function App() {
   return (
