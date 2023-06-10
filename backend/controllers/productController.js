@@ -1,5 +1,6 @@
 import Product from '../models/productmodel.js'
 import User from '../models/User.js'
+import Category from '../models/Category.js'
 import mongoose from "mongoose"
 
 //get all products
@@ -283,6 +284,27 @@ const getAllRatings = async (req, res) => {
 };
 
 
+const addCategory = async (req, res) => {
+  try {
+    const categoryName = req.params.name;
+    if (!categoryName) {
+      return res.status(400).json({ message: 'Category name is required' });
+    }
+    const category = new Category({
+      name: categoryName
+    });
+
+    await category.save();
+    res.status(200).json({ message: 'Category added successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to add category' });
+  }
+};
+const getAllCategories = async(req,res)=>{
+  const categories = await Category.find().sort({createdAt:-1})
+
+  res.status(200).json(categories)
+}
 
 
 
@@ -291,7 +313,8 @@ const getAllRatings = async (req, res) => {
 
 
 export {
-  getAllRatings,
+    addCategory,
+    getAllRatings,
     getStock,
     createProd,
     getAllProds,
@@ -304,5 +327,6 @@ export {
     getProductReviews,
     sortByPriceDescending,
     sortByRatingDescending,
-    sortByPopularityDescending
+    sortByPopularityDescending,
+    getAllCategories
 };

@@ -41,6 +41,7 @@ function RefundReqsSM() {
                       {" "}
                       <button
                         onClick={() => handleRefund(refund._id)}
+                        className="button-refund"
                         style={{
                           backgroundColor: "#4CAF50",
                           border: "none",

@@ -17,7 +17,7 @@ tbody td {
 }
 
 /* Button styles */
-button {
+.button-refund {
   background-color: #4caf50;
   border: none;
   color: white;
@@ -30,7 +30,7 @@ button {
   vertical-align: middle;
 }
 
-button:hover {
+.button-refund:hover {
   background-color: #45a049;
 }
 
