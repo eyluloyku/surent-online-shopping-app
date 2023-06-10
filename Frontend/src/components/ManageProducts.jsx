@@ -11,6 +11,18 @@ function NewProductForm() {
   const [deleteId, setDeleteId] = useState('');
   const [products, setProducts] = useState([]);
 
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/products/getCategories')
+      .then(response => response.json())
+      .then(data => {
+        setCategories(data);
+        console.log(data);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -95,12 +107,18 @@ function NewProductForm() {
         </label>
         <label>
           Category:
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(event) => setCategory(event.target.value)}
             required
-          />
+          >
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Description:

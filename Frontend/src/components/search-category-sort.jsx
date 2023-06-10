@@ -60,7 +60,7 @@ function ProductListingNavbar() {
             <select className='category-dropdown' onChange={(e) => handleCategoryClick(e.target.value)}>
               <option value="">Select a category</option>
               {categories.map((category) => (
-                <option key={category._id} value={category.name}>{category.name}</option>
+                <option value={category.name}>{category.name}</option>
               ))}
             </select>
           </div>

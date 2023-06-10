@@ -3,57 +3,45 @@ import axios from 'axios';
 import "./prodManForms.css";
 
 function UpdateCategoryForm() {
-  const [products, setProducts] = useState([]);
-  const [selectedProductId, setSelectedProductId] = useState('');
+
   const [newCategory, setNewCategory] = useState('');
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
+    fetch('http://localhost:8080/api/products/getCategories')
+      .then(response => response.json())
+      .then(data => {
+        setCategories(data);
+        console.log(data);
+      })
+      .catch(error => console.error(error));
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/products/getAll');
-      setProducts(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await axios.patch(`http://localhost:8080/api/products/update/${selectedProductId}`, {
-        category: newCategory
-      });
 
-      console.log(response.data); // Handle the response as needed
+    try {
+      await axios.get(`http://localhost:8080/api/products/addCategory/${newCategory}`);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
-
-    // Clear form fields
-    setSelectedProductId('');
-    setNewCategory('');
+      
+      setNewCategory('');
   };
 
   return (
     <form className='form-container' onSubmit={handleSubmit}>
+      
       <label>
-        Product:
-        <select
-          value={selectedProductId}
-          onChange={(event) => setSelectedProductId(event.target.value)}
-          required
-        >
-          <option value="">Select a product</option>
-          {products.map((product) => (
-            <option key={product._id} value={product._id}>
-              {product.Pname}
-            </option>
-          ))}
-        </select>
+        Existing Categories:
+        <select className='category-dropdown'>
+              {categories.map((category) => (
+                <option value={category.name}>{category.name}</option>
+              ))}
+            </select>
       </label>
       <label>
         New Category:
@@ -64,8 +52,14 @@ function UpdateCategoryForm() {
           required
         />
       </label>
-      <button type="submit">Update Category</button>
+      <button type="submit">Add Category</button>    
+
+
     </form>
+
+
+
+
   );
 }
 
