@@ -41,6 +41,15 @@ function ProdMan() {
           <button>View</button>
         </Link>
       </div>
+      <div className="admin-section">
+        <h1>Comments</h1>
+        <div className='hint'>
+          By following this link, you can approve comments.
+        </div>
+        <Link to="/Products2">
+          <button>View</button>
+        </Link>
+      </div>
     </div>
   )
 }
