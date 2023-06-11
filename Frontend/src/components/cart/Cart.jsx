@@ -134,6 +134,8 @@ const Cart = ({setCartData}) => {
         }
     }
 
+
+
     return (
         <div>
             <button className="btn--nooutline" onClick={handleShow}>
@@ -148,6 +150,7 @@ const Cart = ({setCartData}) => {
                         <div>
                             <div className="cart-items">
                                 {cart.products.map((item) => (
+                                    
                                     <div className="cart-item" key={item.productId}>
                                         <div className="cart-item-details">
 

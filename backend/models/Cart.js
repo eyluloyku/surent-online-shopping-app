@@ -30,11 +30,20 @@ const cartSchema = new mongoose.Schema({
 cartSchema.pre('save', async function (next) {
     try {
         let total = 0;
+
+        
+
         for (let i = 0; i < this.products.length; i++) {
             const product = await mongoose.model('Product').findById(this.products[i].productId);
+
+            const price = parseFloat(product.price);
+            const Discount_rate = parseFloat(product.Discount_rate);
+        
+            const calculatedPrice = (price * (1 - Discount_rate / 100)).toFixed(2);
+
             this.products[i].Pname = product.Pname;
-            this.products[i].price = product.price;
-            total += (product.price * this.products[i].quantity);
+            this.products[i].price = calculatedPrice;
+            total += (this.products[i].price * this.products[i].quantity);
             // changed the math 
         }
         this.totalPrice = total;

@@ -1,5 +1,6 @@
 import Product from '../models/productmodel.js'
 import User from '../models/User.js'
+import Category from '../models/Category.js'
 import mongoose from "mongoose"
 
 //get all products
@@ -82,7 +83,7 @@ const getProductByCategory = async (req, res) => {
 
 //create new product
 const createProd = async (req,res) =>{
-    const {Pname,price,stock,variants, description, warranty, Distribution_inf, Discount_rate, category, rating, numOfReviews,reviews } = req.body;
+    const {Pname,price,stock,variants, description, warranty, Distribution_inf, Discount_rate, category, images, rating, numOfReviews,reviews } = req.body;
     //add prod document to db.
     try {
         const prod = await Product.create({
@@ -95,6 +96,7 @@ const createProd = async (req,res) =>{
             Distribution_inf,
             Discount_rate,
             category,
+            images,
             rating,
             numOfReviews,
             reviews
@@ -296,10 +298,37 @@ const updateReviewApproval = async (req, res) => {
   }
 };
 
+const addCategory = async (req, res) => {
+  try {
+    const categoryName = req.params.name;
+    if (!categoryName) {
+      return res.status(400).json({ message: 'Category name is required' });
+    }
+    const category = new Category({
+      name: categoryName
+    });
+
+    await category.save();
+    res.status(200).json({ message: 'Category added successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to add category' });
+  }
+};
+const getAllCategories = async(req,res)=>{
+  const categories = await Category.find().sort({createdAt:-1})
+
+  res.status(200).json(categories)
+}
+
+
+
+
+
 
 
 export {
-  getAllRatings,
+    addCategory,
+    getAllRatings,
     getStock,
     createProd,
     getAllProds,
@@ -313,5 +342,6 @@ export {
     sortByPriceDescending,
     sortByRatingDescending,
     sortByPopularityDescending,
-    updateReviewApproval
+    updateReviewApproval,
+    getAllCategories
 };

@@ -39,6 +39,7 @@ const productSchema = new mongoose.Schema({
     },
     Discount_rate:{
         type:Number,
+        default: 0,
         required:false
     },
     category:{

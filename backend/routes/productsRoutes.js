@@ -17,14 +17,16 @@ import {
     sortByPopularityDescending,
     getStock,
     getAllRatings,
-    updateReviewApproval
+    updateReviewApproval,
+    addCategory,
+    getAllCategories
 } from "../controllers/productController.js"
 
 const router = Router();
 router.get('/prodID/:id',getProductById)
 router.get('/getAll', getAllProds)
-router.post('/add',createProd);
-router.post('/getStock:id',getStock);
+router.post('/add',createProd)
+router.post('/getStock:id',getStock)
 router.get('/getAll:id', getAllProds)
 router.get('/getAllRatings/:id',getAllRatings)
 
@@ -38,13 +40,19 @@ router.delete('/rem/:id',deleteProduct)
 
 router.patch('/update/:id',updateProduct)
 
-router.post('/postReview/:id', auth, createProductReview);
+router.post('/postReview/:id', auth, createProductReview)
 
-router.get('/getReview/:id', getProductReviews);
+router.get('/getReview/:id', getProductReviews)
 
 router.get('/sort/price', sortByPriceDescending)
 router.get('/sort/rating', sortByRatingDescending)
 router.get('/sort/popularity', sortByPopularityDescending)
-router.post('/updateReview',updateReviewApproval);
+router.post('/updateReview',updateReviewApproval)
+
+router.get('/addCategory/:name', addCategory)
+router.get('/getCategories', getAllCategories)
+
+
+
 
 export {router};

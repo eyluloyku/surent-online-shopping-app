@@ -62,7 +62,7 @@ body{
 
 .sort{
     width: 100%;
-    max-width: 240px;
+    max-width: 260px;
     max-height: 80px;
     background: #ECECEC;
     display: flex;
@@ -100,7 +100,7 @@ body{
 
 .category-selection{
     width: 100%;
-    max-width: 470px;
+    max-width: 320px;
     max-height: 80px;
     background: #ECECEC;
     display: flex;
@@ -108,14 +108,22 @@ body{
     padding: 10px 20px;
     margin-left: 20px;
     align-items: center;
+    justify-content: center;
 }
-.category-button{
-    padding: 5px;
-    margin: 3px;
-    border-radius: 21px;
-    background: linear-gradient(90deg, rgb(233, 237, 201) 0%, #f1dec9 100%);
-    border-width: 0.1px;
-}
-.category-button:hover{
-    background: aliceblue;
-}
+.category-dropdown {
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+  }
+  
+  .category-dropdown option {
+    padding: 8px;
+  }
+  
+
+  

@@ -144,6 +144,8 @@ const refundProdsFromOrder = async (req, res) => {
       
       refund.prod.status = 'returned'
 
+
+
       const orderr = await Order.findById(refund.order);
       orderr.items.forEach(element => {
         if (String(element.product)==String(refund.prod.product)) {
@@ -155,6 +157,24 @@ const refundProdsFromOrder = async (req, res) => {
       await refund.save();
       // Return a success response
     res.json({ message: 'Products refunded successfully' });
+
+    const user = await User.findById(orderr.user)
+
+    const mailOptions = {
+      from: 'ssurent2@gmail.com',
+      to: user.email,
+      subject: 'About Your Refund Request',
+      text: `Dear valued customer, \n\n Your refund request for the ${prodd.Pname} from your order ${orderr._id} is accepted. Total amount that was refunded is $ ${refund.prod.price}\n\n Best regards,\n\n SuRent`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email: ', error);
+      } else {
+        console.log('Email sent: ', info.response);
+      }
+    });
+
     }
   catch (error) {
     // Handle any errors that occur during the refund process

@@ -7,9 +7,22 @@ function NewProductForm() {
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
   const [category, setCategory] = useState('');
+  const [images, setImages] = useState('');
   const [description, setDescription] = useState('');
   const [deleteId, setDeleteId] = useState('');
   const [products, setProducts] = useState([]);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/products/getCategories')
+      .then(response => response.json())
+      .then(data => {
+        setCategories(data);
+        console.log(data);
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   useEffect(() => {
     fetchProducts();
@@ -33,6 +46,7 @@ function NewProductForm() {
         price: price,
         stock: stock,
         category: category,
+        images: [images],
         description: description
       });
 
@@ -46,6 +60,7 @@ function NewProductForm() {
     setPrice('');
     setStock('');
     setCategory('');
+    setImages('');
     setDescription('');
   };
 
@@ -95,10 +110,25 @@ function NewProductForm() {
         </label>
         <label>
           Category:
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(event) => setCategory(event.target.value)}
+            required
+          >
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Image URL:
+          <input
+            type="text"
+            value={images}
+            onChange={(event) => setImages(event.target.value)}
             required
           />
         </label>
@@ -116,7 +146,7 @@ function NewProductForm() {
         <h2>Delete Product</h2>
         <form onSubmit={handleDelete}>
           <label>
-            Product ID:
+            Product ID:&nbsp;&nbsp;&nbsp;&nbsp;
             <select
               value={deleteId}
               onChange={(event) => setDeleteId(event.target.value)}
@@ -130,6 +160,7 @@ function NewProductForm() {
               ))}
             </select>
           </label>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <button type="submit">Delete</button>
         </form>
       </div>

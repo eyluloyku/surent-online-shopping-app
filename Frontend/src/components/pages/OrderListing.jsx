@@ -11,6 +11,7 @@ function Orders() {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
   const [prods, setProds] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     axios
@@ -26,6 +27,16 @@ function Orders() {
     axios
       .get("http://localhost:8080/api/orders/getOrders/"+id)
       .then((res) => setOrders(res.data));
+  }, [id]);
+
+
+  useEffect(() => {
+    if (!id){
+        return;
+    }
+    axios
+      .get("http://localhost:8080/api/users/getUser/"+id)
+      .then((res) => setUser(res.data));
   }, [id]);
 
   const handleReview = async (id) =>  {
@@ -59,6 +70,13 @@ function Orders() {
   return (
       <Container>
         <Main>
+          <ProfileContainer>
+            <h2> Profile </h2>
+            <p>Name: {user.name} {user.surname}</p>
+            <p>Tax ID: {user.taxId}</p>
+            <p>Email: {user.email}</p>
+            <p>Home Address: {user.address}</p>
+          </ProfileContainer>
           <OrderContainer>
             <h2>Your Orders</h2>
             {orders.length > 0 ? (
@@ -212,12 +230,27 @@ const Main = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  flex-direction: column; /* Added */
+  align-items: center; /* Added */
 `;
 
 const OrderContainer = styled.div`
+  margin-top: 20px; /* Added */
   padding: 15px;
   background-color: #fff;
-  width: 95%;
+  width: 75%;
+  h2 {
+    font-weight: 500;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 15px;
+  }
+`;
+
+const ProfileContainer = styled.div`
+  margin-bottom: 20px; /* Added */
+  padding: 15px;
+  background-color: #fff;
+  width: 75%;
   h2 {
     font-weight: 500;
     border-bottom: 1px solid lightgray;
