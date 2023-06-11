@@ -7,6 +7,7 @@ function NewProductForm() {
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
   const [category, setCategory] = useState('');
+  const [images, setImages] = useState('');
   const [description, setDescription] = useState('');
   const [deleteId, setDeleteId] = useState('');
   const [products, setProducts] = useState([]);
@@ -45,6 +46,7 @@ function NewProductForm() {
         price: price,
         stock: stock,
         category: category,
+        images: [images],
         description: description
       });
 
@@ -58,6 +60,7 @@ function NewProductForm() {
     setPrice('');
     setStock('');
     setCategory('');
+    setImages('');
     setDescription('');
   };
 
@@ -119,6 +122,15 @@ function NewProductForm() {
               </option>
             ))}
           </select>
+        </label>
+        <label>
+          Image URL:
+          <input
+            type="text"
+            value={images}
+            onChange={(event) => setImages(event.target.value)}
+            required
+          />
         </label>
         <label>
           Description:

@@ -83,7 +83,7 @@ const getProductByCategory = async (req, res) => {
 
 //create new product
 const createProd = async (req,res) =>{
-    const {Pname,price,stock,variants, description, warranty, Distribution_inf, Discount_rate, category, rating, numOfReviews,reviews } = req.body;
+    const {Pname,price,stock,variants, description, warranty, Distribution_inf, Discount_rate, category, images, rating, numOfReviews,reviews } = req.body;
     //add prod document to db.
     try {
         const prod = await Product.create({
@@ -96,6 +96,7 @@ const createProd = async (req,res) =>{
             Distribution_inf,
             Discount_rate,
             category,
+            images,
             rating,
             numOfReviews,
             reviews
