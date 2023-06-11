@@ -19,10 +19,49 @@ function OrderList() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/orders/getOrders');
-      setOrders(response.data);
+      setOrders(response.data.map(order => ({
+        ...order,
+        selectedOrderId: '',
+        newStatus: ''
+      })));
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleSubmit = async (event, orderId) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.patch(`http://localhost:8080/api/orders/update/${orderId}`, {
+        status: getOrderStatus(orderId)
+      });
+
+      console.log(response.data); // Handle the response as needed
+    } catch (error) {
+      console.error(error);
+    }
+
+    // Clear form fields
+    setOrderStatus(orderId, '');
+    window.location.reload();
+  };
+
+  const getOrderStatus = (orderId) => {
+    const order = orders.find(order => order._id === orderId);
+    return order ? order.newStatus : '';
+  };
+
+  const setOrderStatus = (orderId, status) => {
+    setOrders(prevOrders => prevOrders.map(order => {
+      if (order._id === orderId) {
+        return {
+          ...order,
+          newStatus: status
+        };
+      }
+      return order;
+    }));
   };
 
   const updateDisplayedPages = () => {
@@ -56,14 +95,37 @@ function OrderList() {
         <div key={order._id} className="order-card">
           <div className="order-header">
             <span>Status: {order.status}</span>
+            <form onSubmit={(event) => handleSubmit(event, order._id)}>
+              <label>
+                <select
+                  value={getOrderStatus(order._id)}
+                  onChange={(event) => setOrderStatus(order._id, event.target.value)}
+                  required
+                >
+                  <option value="">Select a status</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="in-transit">In transit</option>
+                </select>
+              </label>
+              <button type="submit">Update Status</button>
+            </form>
             <span>Date: {new Date(order.dateOrdered).toLocaleDateString()}</span>
           </div>
           <div className="order-details">
             <div className="order-info">
+              <span>Delivery ID: {order._id}</span>
+              <span>Customer ID: {order.user}</span>
               <span>Total Price: {order.totalPrice}</span>
               <span>
                 Shipping Address: {order.shippingAddress.addressLine1}, {order.shippingAddress.city}, {order.shippingAddress.country}
               </span>
+              <span>Products:</span>
+              {order.items.map((prod) => (
+                <div key={prod.product} className="order-info">
+                  <span>Product ID: {prod.product}</span>
+                  <span>Quantity: {prod.quantity}</span>
+                </div>
+              ))}
             </div>
             {/* Render other order details as needed */}
           </div>

@@ -193,4 +193,19 @@ const getAllRefunds= async(req,res)=>{
   res.status(200).json(refunds)
 }
 
-export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder, refundProdsFromOrder, createRefund, getAllRefunds}
+//update a product
+const updateOrder= async(req,res) =>{
+  const {id} = req.params
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).json({error:"No such product"})
+  }
+
+  const order = await Order.findOneAndUpdate({_id:id},{...req.body}) //spread is used since we dont know how many field to update.
+  if(!order){
+    return res.status(404).json({error:"No corresponding order with given id."})
+  }
+  res.status(200).json(order);
+
+}
+
+export {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder, refundProdsFromOrder, createRefund, getAllRefunds, updateOrder}

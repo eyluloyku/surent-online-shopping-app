@@ -282,11 +282,19 @@ const getAllRatings = async (req, res) => {
   }
 };
 
-
-
-
-
-
+const updateReviewApproval = async (req, res) => {
+  const { reviewId, productId } = req.body;
+  console.log(reviewId, productId);
+  try {
+    const result = await Product.updateOne(
+      { _id: productId, "reviews._id": reviewId },
+      { $set: { "reviews.$.approved": true } }
+    );
+    console.log("Review updated successfully:", result);
+  } catch (error) {
+    console.log("Error updating review:", error);
+  }
+};
 
 
 
@@ -304,5 +312,6 @@ export {
     getProductReviews,
     sortByPriceDescending,
     sortByRatingDescending,
-    sortByPopularityDescending
+    sortByPopularityDescending,
+    updateReviewApproval
 };

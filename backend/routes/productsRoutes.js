@@ -16,7 +16,8 @@ import {
     sortByRatingDescending,
     sortByPopularityDescending,
     getStock,
-    getAllRatings
+    getAllRatings,
+    updateReviewApproval
 } from "../controllers/productController.js"
 
 const router = Router();
@@ -44,5 +45,6 @@ router.get('/getReview/:id', getProductReviews);
 router.get('/sort/price', sortByPriceDescending)
 router.get('/sort/rating', sortByRatingDescending)
 router.get('/sort/popularity', sortByPopularityDescending)
+router.post('/updateReview',updateReviewApproval);
 
 export {router};

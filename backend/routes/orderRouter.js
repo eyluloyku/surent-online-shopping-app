@@ -1,7 +1,7 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import Order from '../models/Order.js';
-import {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder, refundProdsFromOrder, createRefund, getAllRefunds} from '../controllers/orderController.js'
+import {getOrders, sendEmailWithPDF, getOrdersByDateRange, getAllOrders, deleteOrder, refundProdsFromOrder,updateOrder ,createRefund, getAllRefunds} from '../controllers/orderController.js'
 import Product from '../models/productmodel.js';
 const orderRouter = express.Router();
 
@@ -40,5 +40,6 @@ orderRouter.post('/deleteOrder/:id', deleteOrder);
 orderRouter.post('/refundProds', refundProdsFromOrder);
 orderRouter.post('/createRefund', createRefund);
 orderRouter.get('/getRefunds', getAllRefunds);
+orderRouter.patch('/update/:id',updateOrder)
 
 export {orderRouter};
