@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SalesMan() {
+function ProfitChart() {
 
   const handleGraphSubmit = (event) => {
     event.preventDefault(); // Prevent the form from being submitted normally
@@ -36,4 +36,4 @@ function SalesMan() {
   )
 }
 
-export default SalesMan
+export default ProfitChart

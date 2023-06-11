@@ -26,7 +26,8 @@ import OrderDetails from "./components/OrderDetails";
 import PriceSetListing from "./components/pages/PriceSetListing2";
 import SetDiscount from "./components/pages/SetDiscount";
 import RefundReqsSM from "./components/pages/RefundRequestsSM";
-import SalesMan from "./components/salesMan";
+import ProfitChart from "./components/salesMan";
+import SalesMan from "./components/pages/SalesManNav";
 
 function App() {
   return (
@@ -51,7 +52,7 @@ function App() {
           <Route path="/wishlist/:id" element={<Wishlist/>} />
           <Route path="/AdminLogin" element={<AdminLogin/>} />
           <Route path="/prodMan" element={<ProdMan/>} />
-          <Route path="/salesMan" element={<SalesMan/>} />
+          <Route path="/profitChart" element={<ProfitChart/>} />
           <Route path="/revenue/:date1/:date2" element={<RevenueChart/>} />
           <Route path="/InvoicesSM" element={<InvoicesForSM/>} />
           <Route path="/RefundReqSM" element={<RefundReqsSM/>} />
@@ -61,6 +62,7 @@ function App() {
           <Route path="/Orderdetails" element={<OrderDetails/>}></Route>
           <Route path="/SetPrice" element={<PriceSetListing/>} />
           <Route path="/SetDiscount" element={<SetDiscount/>} />
+          <Route path="/salesMan" element={<SalesMan/>} />
         </Routes>
       </Router>
     </div>
