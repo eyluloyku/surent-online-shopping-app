@@ -146,7 +146,7 @@ function NewProductForm() {
         <h2>Delete Product</h2>
         <form onSubmit={handleDelete}>
           <label>
-            Product ID:
+            Product ID:&nbsp;&nbsp;&nbsp;&nbsp;
             <select
               value={deleteId}
               onChange={(event) => setDeleteId(event.target.value)}
@@ -160,6 +160,7 @@ function NewProductForm() {
               ))}
             </select>
           </label>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <button type="submit">Delete</button>
         </form>
       </div>
