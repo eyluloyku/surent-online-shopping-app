@@ -48,6 +48,17 @@ function SalesMan() {
         
         </div>
 
+        <div className="admin-section">
+            <h1>Approve Refunds</h1>
+            <div className='hint'>
+              By following this link, you can approve refunds as sales manager !
+            </div>
+            <Link to="/RefundReqSM">
+              <button>Approve Refunds</button>
+            </Link>
+        
+        </div>
+
         </div>
     )
 }
