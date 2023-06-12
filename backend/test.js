@@ -296,7 +296,7 @@ describe('GET / carts by user ID', function() {
     });
 });
 
-//not tested down from here
+//not tested down from here.
 
 
 describe('GET /getOrders', function() {
@@ -307,10 +307,10 @@ describe('GET /getOrders', function() {
       };
       const mockRequest = {};
   
-      // Invoke the route handler function
+      // Invoke the route handler function.
       getAllOrders(mockRequest, mockResponse);
   
-      // Assert the expected behavior
+      // Assert the expected behavior.
       expect(mockResponse.status.calledWith(200)).to.be.true;
       expect(mockResponse.json.calledOnce).to.be.true;
     });
@@ -329,13 +329,13 @@ describe('GET /getOrders', function() {
         }
       };
   
-      // Invoke the route handler function
+      // Invoke the route handler function.
       getOrdersByDateRange(mockRequest, mockResponse);
   
-      // Assert the expected behavior
+      // Assert the expected behavior.
       expect(mockResponse.status.calledWith(200)).to.be.true;
       expect(mockResponse.json.calledOnce).to.be.true;
-      // baska assertion varsa buraya
+      // baska assertion varsa buraya:
     });
   });
 
@@ -483,6 +483,7 @@ describe('POST /deleteOrder/:id', function() {
     });
   });
   
+  //ntest complete
   
   
   
