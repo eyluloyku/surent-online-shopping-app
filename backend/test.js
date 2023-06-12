@@ -296,3 +296,194 @@ describe('GET / carts by user ID', function() {
     });
 });
 
+//not tested down from here
+
+
+describe('GET /getOrders', function() {
+    it('should return all orders', function() {
+      // baska dependency varsa
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {};
+  
+      // Invoke the route handler function
+      getAllOrders(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+    });
+  });
+
+  describe('GET /getOrdersByDateRange', function() {
+    it('should return orders within the specified date range', function() {
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        params: {
+          date1: '2022-01-01',
+          date2: '2022-01-31'
+        }
+      };
+  
+      // Invoke the route handler function
+      getOrdersByDateRange(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      // baska assertion varsa buraya
+    });
+  });
+
+  describe('POST /sendPDF', function() {
+    it('should send an email with a PDF attachment', function() {
+      // Mock any necessary dependencies
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        // Set up the request body and any necessary headers or attachments
+        body: {
+          email: 'test@example.com',
+          pdfPath: '/path/to/pdf.pdf'
+        }
+      };
+  
+      // Invoke the route handler function
+      sendEmailWithPDF(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      //assertion eklenecekse buraya
+    });
+  });
+  
+  
+describe('POST /deleteOrder/:id', function() {
+    it('should delete an order with the given ID', function() {
+      // Mock any necessary dependencies
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        params: {
+          id: 'validOrderID'
+        }
+      };
+  
+      // Invoke the route handler function
+      deleteOrder(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      //assertion eklenecekse buraya
+    });
+  });
+
+  describe('POST /refundProds', function() {
+    it('should refund products from an order', function() {
+      // Mock any necessary dependencies
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        // Set up the request body and any necessary headers or data
+        body: {
+          orderID: 'validOrderID',
+          products: ['product1', 'product2']
+        }
+      };
+  
+      // Invoke the route handler function
+      refundProdsFromOrder(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      //assertion eklenecekse buraya
+    });
+  });
+  
+  describe('POST /createRefund', function() {
+    it('should create a refund', function() {
+      // Mock any necessary dependencies
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        // Set up the request body and any necessary headers or data
+        body: {
+          orderID: 'validOrderID',
+          refundAmount: 50.0
+        }
+      };
+  
+      // Invoke the route handler function
+      createRefund(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      // assertion varsa buraya
+    });
+  });
+  
+  describe('GET /getRefunds', function() {
+    it('should get all refunds', function() {
+      // Mock any necessary dependencies
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        // Set up any necessary request parameters or headers
+      };
+  
+      // Invoke the route handler function
+      getAllRefunds(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      // assertler
+    });
+  });
+
+  describe('PATCH /update/:id', function() {
+    it('should update an order with the given ID', function() {
+      // Mock any necessary dependencies
+      const mockResponse = {
+        status: sinon.spy(),
+        json: sinon.spy()
+      };
+      const mockRequest = {
+        params: {
+          id: 'validOrderID'
+        },
+        // Set up any necessary request body or headers
+      };
+  
+      // Invoke the route handler function
+      updateOrder(mockRequest, mockResponse);
+  
+      // Assert the expected behavior
+      expect(mockResponse.status.calledWith(200)).to.be.true;
+      expect(mockResponse.json.calledOnce).to.be.true;
+      // assertler
+    });
+  });
+  
+  
+  
+  
