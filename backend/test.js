@@ -456,7 +456,7 @@ describe('POST /deleteOrder/:id', function() {
       // Assert the expected behavior
       expect(mockResponse.status.calledWith(200)).to.be.true;
       expect(mockResponse.json.calledOnce).to.be.true;
-      // assertler
+      // diger assertler buraya
     });
   });
 
@@ -480,7 +480,7 @@ describe('POST /deleteOrder/:id', function() {
       // Assert the expected behavior
       expect(mockResponse.status.calledWith(200)).to.be.true;
       expect(mockResponse.json.calledOnce).to.be.true;
-      // assertler
+      // diger assertler buraya
     });
   });
   
