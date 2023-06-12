@@ -301,7 +301,6 @@ describe('GET / carts by user ID', function() {
 
 describe('GET /getOrders', function() {
     it('should return all orders', function() {
-      // baska dependency varsa
       const mockResponse = {
         status: sinon.spy(),
         json: sinon.spy()
