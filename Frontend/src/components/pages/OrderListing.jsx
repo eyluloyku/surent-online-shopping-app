@@ -100,6 +100,9 @@ function Orders() {
                   <OrderBasket>
                     <h4>Order</h4>
                     <p>
+                      Date: <span>{order.dateOrdered.substring(0,10)}</span>
+                    </p>
+                    <p>
                       Status: <span>{order.status}</span>
                     </p>
                     <p>
